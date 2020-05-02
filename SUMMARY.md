@@ -2,5 +2,6 @@
 
 * [前言](README.md)
 * [第01章-在idea怎么调试jdk源码](第01章-在idea怎么调试jdk源码/README.md)
-* [Chapter2](chapter2/README.md)
+* [第02章-并发编程基础](第02章-并发编程基础/README.md)
+    * [01-线程的定义和意义](第02章-并发编程基础/02-01-线程的定义和意义.md)
 
