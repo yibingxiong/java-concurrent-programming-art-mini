@@ -418,6 +418,123 @@ public final boolean release(int arg) {
 
 没什么可写的了，列个标题，猜也能猜到怎么做的了
 
+## 一个共享式获取同步状态的例子
+
+前面的“独占不可重入锁”演示了独占式获取同步锁，这个例子演示共享式
+
+要求：实现一把锁，至多三个（书上是两个，咱们变化下，哈哈）线程可以获得
+思路：使用四个状态，0-3， 表示剩余可以获得锁的线程数，0表示没有了，不能获取了，需要阻塞
+
+```java
+public class Demo_03_02_2_TripleLock {
+    static class TripleLock implements Lock {
+
+        static private class Sync extends AbstractQueuedSynchronizer {
+            public Sync() {
+                super();
+                setState(3);
+            }
+
+            @Override
+            protected int tryAcquireShared(int arg) {
+                for (; ; ) {
+                    int currentState = getState();
+                    int newState = currentState - arg;
+                    if (newState < 0) {
+                        return newState;
+                    }
+                    if (compareAndSetState(currentState, newState)) {
+                        return newState;
+                    }
+                }
+            }
+
+            @Override
+            protected boolean tryReleaseShared(int arg) {
+                // 注意这里也需要保证原子性，因为可能几个线程同时释放锁
+                for (; ; ) {
+                    int currentState = getState();
+                    if (currentState >= 3) {
+                        throw new IllegalStateException();
+                    }
+                    int newState = currentState + arg;
+                    if (compareAndSetState(currentState, newState)) {
+                        return true;
+                    }
+                }
+            }
+
+            @Override
+            protected boolean isHeldExclusively() {
+                return getState() <= 0;
+            }
+        }
+
+        private static final Sync sync = new Sync();
+
+        @Override
+        public void lock() {
+            sync.acquireShared(1);
+        }
+
+        @Override
+        public void lockInterruptibly() throws InterruptedException {
+            sync.acquireSharedInterruptibly(1);
+        }
+
+        @Override
+        public boolean tryLock() {
+            return sync.tryAcquireShared(1) >= 0;
+        }
+
+        @Override
+        public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+            return sync.tryAcquireSharedNanos(1, unit.toNanos(time));
+        }
+
+        @Override
+        public void unlock() {
+            sync.releaseShared(1);
+        }
+
+        @Override
+        public Condition newCondition() {
+            // 暂时不用condition,直接返回null
+            return null;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        TripleLock tripleLock = new TripleLock();
+        // 这个测试例子，发现0-9一下都启动了，但是每一批都只有三个线程在执行，因为只有三个线程能拿到锁
+        // 三个有一个执行完了，后边的才能拿到锁
+        // 证明写的没问题
+        for (int i = 0; i < 10; i++) {
+            Thread thread = new Thread(() -> {
+                tripleLock.lock();
+
+                try {
+                    for (int j = 0; j < 10; j++) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(Thread.currentThread().getName() + "执行" + j);
+                    }
+                } finally {
+                    tripleLock.unlock();
+                }
+            });
+            thread.setName("线程" + i);
+            thread.start();
+            System.out.println("线程" + i + "启动了");
+        }
+    }
+}
+```
+
 ## 小结
 
 AQS写太多了，贴了不少代码，但是回头看，几句话就能概括AQS。
