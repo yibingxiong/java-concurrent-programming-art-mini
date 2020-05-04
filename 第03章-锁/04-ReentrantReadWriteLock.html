@@ -1,0 +1,614 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>04-ReentrantReadWriteLock · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="05-LockSupport.html" />
+    
+    
+    <link rel="prev" href="03-ReentrantLock.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../第01章-在idea怎么调试jdk源码/">
+            
+                <a href="../第01章-在idea怎么调试jdk源码/">
+            
+                    
+                    第01章-在idea怎么调试jdk源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../第02章-并发编程基础/">
+            
+                <a href="../第02章-并发编程基础/">
+            
+                    
+                    第02章-并发编程基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../第02章-并发编程基础/01-线程的定义和意义.html">
+            
+                <a href="../第02章-并发编程基础/01-线程的定义和意义.html">
+            
+                    
+                    01-线程的定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../第02章-并发编程基础/02-创建线程的三种方式.html">
+            
+                <a href="../第02章-并发编程基础/02-创建线程的三种方式.html">
+            
+                    
+                    02-创建线程的三种方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../第02章-并发编程基础/03-线程的一些属性.html">
+            
+                <a href="../第02章-并发编程基础/03-线程的一些属性.html">
+            
+                    
+                    03-线程的一些属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../第02章-并发编程基础/04-线程同步.html">
+            
+                <a href="../第02章-并发编程基础/04-线程同步.html">
+            
+                    
+                    04-线程同步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../第02章-并发编程基础/05-线程间的通信.html">
+            
+                <a href="../第02章-并发编程基础/05-线程间的通信.html">
+            
+                    
+                    05-线程间的通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../第02章-并发编程基础/06-控制线程.html">
+            
+                <a href="../第02章-并发编程基础/06-控制线程.html">
+            
+                    
+                    06-控制线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../第02章-并发编程基础/07-线程的生命周期.html">
+            
+                <a href="../第02章-并发编程基础/07-线程的生命周期.html">
+            
+                    
+                    07-线程的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../第02章-并发编程基础/08-ThreadLocal.html">
+            
+                <a href="../第02章-并发编程基础/08-ThreadLocal.html">
+            
+                    
+                    08-ThreadLocal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../第02章-并发编程基础/09-原子类.html">
+            
+                <a href="../第02章-并发编程基础/09-原子类.html">
+            
+                    
+                    09-原子类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="01-锁的基本使用.html">
+            
+                <a href="01-锁的基本使用.html">
+            
+                    
+                    01-锁的基本使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="02-AQS.html">
+            
+                <a href="02-AQS.html">
+            
+                    
+                    02-AQS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="03-ReentrantLock.html">
+            
+                <a href="03-ReentrantLock.html">
+            
+                    
+                    03-ReentrantLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="04-ReentrantReadWriteLock.html">
+            
+                <a href="04-ReentrantReadWriteLock.html">
+            
+                    
+                    04-ReentrantReadWriteLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="05-LockSupport.html">
+            
+                <a href="05-LockSupport.html">
+            
+                    
+                    05-LockSupport
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="06-Condition.html">
+            
+                <a href="06-Condition.html">
+            
+                    
+                    06-Condition
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >04-ReentrantReadWriteLock</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="reentrantreadwritelock">ReentrantReadWriteLock</h1>
+<ul>
+<li>&#x8BFB;&#x5199;&#x9501;&#x5728;&#x540C;&#x4E00;&#x65F6;&#x523B;&#x5141;&#x8BB8;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;</li>
+<li>&#x5F53;&#x4E00;&#x4E2A;&#x5199;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x963B;&#x585E;</li>
+<li>&#x5F53;&#x4E00;&#x4E2A;&#x8BFB;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x5176;&#x4ED6;&#x8BFB;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x88AB;&#x963B;&#x585E;</li>
+<li>&#x8BFB;&#x5199;&#x9501;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x5BF9;&#x9501;&#xFF0C;&#x4E00;&#x4E2A;&#x8BFB;&#x9501;&#x548C;&#x4E00;&#x4E2A;&#x5199;&#x9501;&#xFF0C;&#x901A;&#x8FC7;&#x5206;&#x79BB;&#x8BFB;&#x9501;&#x548C;&#x5199;&#x9501;&#xFF0C;&#x4F7F;&#x5F97;&#x5E76;&#x53D1;&#x6027;&#x76F8;&#x6BD4;&#x4E00;&#x822C;&#x7684;&#x6392;&#x4ED6;&#x9501;&#x6709;&#x4E86;&#x5F88;&#x5927;&#x63D0;&#x5347;&#x3002;</li>
+<li>&#x5728;&#x8BFB;&#x591A;&#x4E8E;&#x5199;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8BFB;&#x5199;&#x9501;&#x80FD;&#x591F;&#x63D0;&#x4F9B;&#x6BD4;&#x6392;&#x5B83;&#x9501;&#x66F4;&#x597D;&#x7684;&#x5E76;&#x53D1;&#x6027;&#x548C;&#x541E;&#x5410;&#x91CF;</li>
+</ul>
+<h2 id="&#x7279;&#x6027;">&#x7279;&#x6027;</h2>
+<ul>
+<li>&#x652F;&#x6301;&#x516C;&#x5E73;&#x9501;&#x4E0E;&#x975E;&#x516C;&#x5E73;&#x9501;</li>
+<li>&#x53EF;&#x91CD;&#x5165;</li>
+<li>&#x652F;&#x6301;&#x9501;&#x964D;&#x7EA7;&#xFF1A;&#x9075;&#x5FAA;&#x83B7;&#x53D6;&#x5199;&#x9501;&#x3001;&#x83B7;&#x53D6;&#x8BFB;&#x9501;&#x518D;&#x91CA;&#x653E;&#x5199;&#x9501;&#x7684;&#x6B21;&#x5E8F;&#xFF0C;&#x5199;&#x9501;&#x80FD;&#x591F;&#x964D;&#x7EA7;&#x4E3A;&#x8BFB;&#x9501;</li>
+</ul>
+<h2 id="&#x6838;&#x5FC3;api">&#x6838;&#x5FC3;API</h2>
+<ul>
+<li>ReentrantReadWriteLock.ReadLock  readLock()&#xFF1A; &#x83B7;&#x53D6;&#x8BFB;&#x9501;</li>
+<li>ReentrantReadWriteLock.WriteLock writeLock()&#xFF1A; &#x83B7;&#x53D6;&#x5199;&#x9501;</li>
+<li>int getReadLockCount()&#xFF1A;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x8BFB;&#x9501;&#x88AB;&#x83B7;&#x53D6;&#x5230;&#x7684;&#x6B21;&#x6570;&#xFF0C;&#x4E0E;&#x7EBF;&#x7A0B;&#x6570;&#x65E0;&#x5173;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;n&#x6B21; &#x8FD4;&#x56DE;n</li>
+<li>int getReadHoldCount()&#xFF1A;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x8BFB;&#x9501;&#x7684;&#x6B21;&#x6570;</li>
+<li>boolean isWriteLocked()&#xFF1A;&#x5224;&#x65AD;&#x8BFB;&#x9501;&#x662F;&#x5426;&#x88AB;&#x83B7;&#x53D6;&#x4E86;</li>
+<li>int getWriteHoldCount()&#xFF1A;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x5199;&#x9501;&#x88AB;&#x83B7;&#x53D6;&#x7684;&#x6B21;&#x6570;</li>
+</ul>
+<h2 id="&#x539F;&#x7406;">&#x539F;&#x7406;</h2>
+<h3 id="&#x8BFB;&#x5199;&#x72B6;&#x6001;&#x7684;&#x8BBE;&#x8BA1;">&#x8BFB;&#x5199;&#x72B6;&#x6001;&#x7684;&#x8BBE;&#x8BA1;</h3>
+<p>&#x8BFB;&#x5199;&#x9501;&#x6709;&#x4E24;&#x4E2A;&#x9501;&#xFF0C;&#x800C;&#x4E14;&#x4ED6;&#x4EEC;&#x662F;&#x6709;&#x5173;&#x7CFB;&#x7684;&#xFF0C;&#x663E;&#x7136;&#x662F;&#x7528;&#x4E00;&#x4E2A;AQS&#xFF0C;&#x4F46;&#x662F;&#x4E00;&#x4E2A;AQS&#x53EA;&#x6709;&#x4E00;&#x4E2A;state&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x7528;&#x4E00;&#x4E2A;state&#x8868;&#x793A;&#x4E24;&#x79CD;&#x9501;&#x7684;&#x72B6;&#x6001;&#x5C31;&#x9700;&#x8981;&#x5BF9;&#x72B6;&#x6001;&#x62C6;&#x5206;&#xFF0C;int&#x662F;32&#x4F4D;&#xFF0C;&#x6240;&#x4EE5;&#x62C6;&#x6210;&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#xFF0C;&#x9AD8;16&#x4F4D;&#x6807;&#x8BC6;&#x8BFB;&#x72B6;&#x6001;&#xFF0C;&#x4F4E;16&#x4F4D;&#x6807;&#x8BC6;&#x5199;&#x72B6;&#x6001;&#x3002;</p>
+<p>&#x5728;&#x8BBE;&#x7F6E;&#x6216;&#x8005;&#x83B7;&#x53D6;&#x72B6;&#x6001;&#x65F6;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E9B;&#x4F4D;&#x8FD0;&#x7B97;</p>
+<h3 id="&#x5199;&#x9501;&#x7684;&#x83B7;&#x53D6;&#x4E0E;&#x91CA;&#x653E;">&#x5199;&#x9501;&#x7684;&#x83B7;&#x53D6;&#x4E0E;&#x91CA;&#x653E;</h3>
+<p>&#x5199;&#x9501;&#x662F;&#x4E00;&#x4E2A;&#x652F;&#x6301;&#x91CD;&#x8FDB;&#x5165;&#x7684;&#x6392;&#x5B83;&#x9501;&#x3002;&#x82E5;&#x5199;&#x72B6;&#x6001;&#x4E3A;0&#x4E14;&#x8BFB;&#x72B6;&#x6001;&#x4E3A;0&#xFF0C;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x5199;&#x9501;&#xFF1B;&#x82E5;&#x5199;&#x72B6;&#x6001;&#x5927;&#x4E8E;0&#xFF0C;&#x770B;&#x83B7;&#x53D6;&#x540C;&#x6B65;&#x72B6;&#x6001;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x4E0D;&#x662F;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#xFF0C;&#x662F;&#x5219;&#x5199;&#x72B6;&#x6001;+1&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x6784;&#x5EFA;&#x8282;&#x70B9;&#x8FDB;&#x5165;&#x540C;&#x6B65;&#x961F;&#x5217;&#xFF0C;&#x81EA;&#x65CB;&#x963B;&#x585E;&#x3002;</p>
+<p>&#x5199;&#x9501;&#x7684;&#x91CA;&#x653E;&#x4E0E;ReentrantLock&#x7684;&#x91CA;&#x653E;&#x8FC7;&#x7A0B;&#x57FA;&#x672C;&#x7C7B;&#x4F3C;&#xFF0C;&#x6BCF;&#x6B21;&#x91CA;&#x653E;&#x5199;&#x72B6;&#x6001;-1&#xFF0C;&#x5F53;&#x5199;&#x72B6;&#x6001;&#x4E3A;0&#x65F6;&#x8868;&#x793A;&#x5199;&#x9501;&#x5DF2;&#x88AB;&#x91CA;&#x653E;&#xFF0C;&#x5524;&#x9192;&#x540C;&#x6B65;&#x961F;&#x5217;&#x91CC;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x540C;&#x65F6;&#x524D;&#x6B21;&#x5199;&#x7EBF;&#x7A0B;&#x7684;&#x4FEE;&#x6539;&#x5BF9;&#x540E;&#x7EED;&#x8BFB;&#x5199;&#x7EBF;&#x7A0B;&#x53EF;&#x89C1;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryWriteLock</span><span class="hljs-params">()</span> </span>{
+    Thread current = Thread.currentThread();
+    <span class="hljs-keyword">int</span> c = getState();
+    <span class="hljs-keyword">if</span> (c != <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">int</span> w = exclusiveCount(c); <span class="hljs-comment">// c&#x4E0E;0x0000FFFF&#x6C42;&#x4E0E;</span>
+        <span class="hljs-comment">// c&#xFF01;=0&#x4F46;&#x662F;&#x4F4E;16&#x4F4D;&#x4E3A;0&#x8868;&#x793A;&#x6709;&#x4EBA;&#x62FF;&#x4E86;&#x8BFB;&#x9501;&#xFF0C;&#x6709;&#x4EBA;&#x62FF;&#x4E86;&#x8BFB;&#x9501;&#x662F;&#x4E0D;&#x80FD;&#x83B7;&#x53D6;&#x5199;&#x9501;&#x7684;</span>
+        <span class="hljs-keyword">if</span> (w == <span class="hljs-number">0</span> || current != getExclusiveOwnerThread())
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        <span class="hljs-comment">// MAX_COUNT&#x662F;0xffff, &#x56E0;&#x4E3A;&#x5199;&#x72B6;&#x6001;&#x662F;&#x53EA;&#x6709;16&#x4F4D;&#x7684;</span>
+        <span class="hljs-keyword">if</span> (w == MAX_COUNT)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);
+    }
+    <span class="hljs-keyword">if</span> (!compareAndSetState(c, c + <span class="hljs-number">1</span>))
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    setExclusiveOwnerThread(current);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+}
+<span class="hljs-comment">// &#x8FD9;&#x6CA1;&#x5565;&#x597D;&#x8BF4;&#x7684;</span>
+<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryRelease</span><span class="hljs-params">(<span class="hljs-keyword">int</span> releases)</span> </span>{
+    <span class="hljs-keyword">if</span> (!isHeldExclusively())
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+    <span class="hljs-keyword">int</span> nextc = getState() - releases;
+    <span class="hljs-keyword">boolean</span> free = exclusiveCount(nextc) == <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (free)
+        setExclusiveOwnerThread(<span class="hljs-keyword">null</span>);
+    setState(nextc);
+    <span class="hljs-keyword">return</span> free;
+}
+</code></pre>
+<p><em>&#x53EF;&#x4EE5;&#x601D;&#x8003;&#x4E0B;&#x4E3A;&#x4EC0;&#x4E48;&#x6709;&#x4EBA;&#x62FF;&#x4E86;&#x8BFB;&#x9501;&#x4E0D;&#x80FD;&#x83B7;&#x53D6;&#x5199;&#x9501;</em></p>
+<h3 id="&#x5199;&#x9501;&#x7684;&#x83B7;&#x53D6;&#x4E0E;&#x91CA;&#x653E;">&#x5199;&#x9501;&#x7684;&#x83B7;&#x53D6;&#x4E0E;&#x91CA;&#x653E;</h3>
+<p>&#x8BFB;&#x9501;&#x662F;&#x4E00;&#x4E2A;&#x652F;&#x6301;&#x91CD;&#x8FDB;&#x5165;&#x7684;&#x5171;&#x4EAB;&#x9501;&#xFF0C;&#x5B83;&#x80FD;&#x591F;&#x88AB;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x83B7;&#x53D6;&#xFF0C;&#x5199;&#x72B6;&#x6001;&#x4F4D;0&#x65F6;&#x603B;&#x80FD;&#x83B7;&#x53D6;&#xFF0C;&#x5199;&#x72B6;&#x6001;&#x4E0D;&#x4E3A;0&#xFF0C;&#x4E0D;&#x4F1A;&#x83B7;&#x53D6;&#xFF0C;&#x83B7;&#x53D6;&#x6210;&#x529F;&#x8BFB;&#x72B6;&#x6001;&#x5C31;+1&#x3002;</p>
+<p>&#x91CA;&#x653E;&#x7684;&#x65F6;&#x5019;&#x5462;&#x5C31;&#x662F;&#x8BFB;&#x72B6;&#x6001;-1&#xFF0C;&#x51CF;&#x5230;0&#x5C31;&#x662F;&#x8BFB;&#x9501;&#x91CA;&#x653E;&#x4E86;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#x8FD9;&#x91CC;&#x8FB9;&#x53EF;&#x80FD;&#x4F1A;&#x6D89;&#x53CA;&#x8BB0;&#x5F55;&#x54EA;&#x4E9B;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x4E86;&#x8BFB;&#x9501;&#xFF0C;&#x6211;&#x4E5F;&#x6CA1;&#x7EC6;&#x770B;&#xFF0C;&#x611F;&#x89C9;&#x6CA1;&#x4EC0;&#x4E48;&#x96BE;&#x5EA6;&#x3002;</p>
+<h3 id="&#x9501;&#x964D;&#x7EA7;">&#x9501;&#x964D;&#x7EA7;</h3>
+<p>&#x9501;&#x964D;&#x7EA7;&#x662F;&#x6307;&#x628A;&#x6301;&#x4F4F;&#xFF08;&#x5F53;&#x524D;&#x62E5;&#x6709;&#x7684;&#xFF09;&#x5199;&#x9501;&#xFF0C;&#x518D;&#x83B7;&#x53D6;&#x5230;&#x8BFB;&#x9501;&#xFF0C;&#x968F;&#x540E;&#x91CA;&#x653E;&#xFF08;&#x5148;&#x524D;&#x62E5;&#x6709;&#x7684;&#xFF09;&#x5199;&#x9501;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>&#x76F4;&#x63A5;&#x642C;&#x4E66;&#x4E0A;&#x7684;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Process</span> </span>{
+    <span class="hljs-keyword">private</span> ReentrantReadWriteLock reentrantReadWriteLock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();
+    <span class="hljs-keyword">private</span> ReentrantReadWriteLock.ReadLock readLock = reentrantReadWriteLock.readLock();
+    <span class="hljs-keyword">private</span> ReentrantReadWriteLock.WriteLock writeLock = reentrantReadWriteLock.writeLock();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> isUpdate = <span class="hljs-keyword">false</span>;
+    <span class="hljs-keyword">private</span> LinkedList&lt;Integer&gt; linkedList = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">processData</span><span class="hljs-params">()</span> </span>{
+        readLock.lock();
+        <span class="hljs-keyword">if</span> (!isUpdate) {
+            <span class="hljs-comment">// &#x5FC5;&#x987B;&#x5148;&#x91CA;&#x653E;&#x8BFB;&#x4E66;</span>
+            readLock.unlock();
+            writeLock.lock();
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-keyword">if</span> (!isUpdate) {
+                    <span class="hljs-comment">// &#x6A21;&#x62DF;&#x751F;&#x4EA7;&#x6570;&#x636E;</span>
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
+                        linkedList.push(i);
+                    }
+                    isUpdate = <span class="hljs-keyword">true</span>;
+                }
+                readLock.lock(); <span class="hljs-comment">// 1</span>
+            } <span class="hljs-keyword">finally</span> {
+                writeLock.unlock();
+            }
+            <span class="hljs-comment">// &#x5199;&#x9501;&#x964D;&#x7EA7;&#x4E3A;&#x8BFB;&#x9501;</span>
+        }
+
+        <span class="hljs-comment">// 2</span>
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">while</span> (!linkedList.isEmpty()) {
+                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot;&#x6D88;&#x8D39;&#x6570;&#x636E;:&quot;</span> + linkedList.poll());
+            }
+        } <span class="hljs-keyword">finally</span> {
+            readLock.unlock();
+        }
+
+    }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo_03_04_5_LockChange</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        Process process = <span class="hljs-keyword">new</span> Process();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+            <span class="hljs-keyword">new</span> Thread(() -&gt; {
+                process.processData();
+            }).start();
+        }
+    }
+}
+</code></pre>
+<p>&#x6839;&#x636E;&#x9501;&#x964D;&#x7EA7;&#x8FD8;&#x662F;&#x6BD4;&#x8F83;&#x96BE;&#x7406;&#x89E3;&#x7684;&#xFF0C;&#x4E3A;&#x5565;&#x8981;&#x6709;&#x8FD9;&#x4E2A;&#x4E1C;&#x897F;&#xFF0C;&#x4E66;&#x4E0A;&#x539F;&#x6587;</p>
+<blockquote>
+<p>&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x4E0D;&#x83B7;&#x53D6;&#x8BFB;&#x9501;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x91CA;&#x653E;&#x5199;&#x9501;&#xFF0C; &#x5047;&#x8BBE;&#x6B64;&#x523B;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF08;&#x8BB0;&#x4F5C;&#x7EBF;&#x7A0B;T&#xFF09;&#x83B7;&#x53D6;&#x4E86;&#x5199;&#x9501;&#x5E76;&#x4FEE;&#x6539;&#x4E86;&#x6570;&#x636E;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x65E0;&#x6CD5;&#x611F;&#x77E5;&#x7EBF;&#x7A0B;T&#x7684;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x8BFB;&#x9501;&#xFF0C;&#x5373;&#x9075;&#x5FAA;&#x9501;&#x964D;&#x7EA7;&#x7684;&#x6B65;&#x9AA4;&#xFF0C;&#x5219;&#x7EBF;&#x7A0B;T&#x5C06;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x5E76;&#x91CA;&#x653E;&#x8BFB;&#x9501;&#x4E4B;&#x540E;&#xFF0C;&#x7EBF;&#x7A0B;T&#x624D;&#x80FD;&#x83B7;&#x53D6;&#x5199;&#x9501;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x3002;</p>
+</blockquote>
+<p>&#x5047;&#x8BBE;1&#x4E0D;&#x52A0;&#x8BFB;&#x9501;&#x7684;&#x8BDD;&#xFF0C;&#x7EBF;&#x7A0B;A&#x6267;&#x884C;&#x5230;2&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5199;&#x9501;&#x5DF2;&#x7ECF;&#x91CA;&#x653E;&#x4E86;&#xFF0C;&#x8BFB;&#x9501;&#x4E5F;&#x6CA1;&#x6709;&#xFF0C;&#x6240;&#x53EF;&#x80FD;&#x6070;&#x597D;&#x6B64;&#x65F6;&#x6709;&#x522B;&#x7684;&#x7EBF;&#x7A0B;&#xFF08;&#x7EBF;&#x7A0B;B&#xFF09;&#x83B7;&#x53D6;&#x5230;&#x4E86;&#x5199;&#x9501;&#xFF0C;&#x53C8;&#x4FEE;&#x6539;&#x4E86;&#x6570;&#x636E;&#xFF0C;&#x6B64;&#x65F6;&#x7EBF;&#x7A0B;A&#x6216;&#x7684;&#x6570;&#x636E;&#x8FD8;&#x662F;&#x4E4B;&#x524D;&#x7684;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x4ED6;&#x6CA1;&#x6709;&#x611F;&#x77E5;&#x5230;&#x7EBF;&#x7A0B;B&#x5BF9;&#x6570;&#x636E;&#x7684;&#x66F4;&#x65B0;&#x3002;</p>
+<h2 id="&#x788E;&#x788E;&#x5FF5;">&#x788E;&#x788E;&#x5FF5;</h2>
+<p>&#x7A81;&#x7136;&#x60F3;&#x5230;&#x4E00;&#x4E2A;&#x9762;&#x8BD5;&#x9898;&#xFF0C;&#x8BFB;&#x5199;&#x9501;&#x4E2D;&#x8BFB;&#x9501;&#x4E4B;&#x591A;&#x53EF;&#x4EE5;&#x88AB;&#x591A;&#x5C11;&#x4E2A;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#xFF1F;&#x5199;&#x9501;&#x5462;&#xFF1F;&#x8FD9;&#x4E2A;&#x662F;&#x6211;&#x81EA;&#x5DF1;&#x60F3;&#x5230;&#x7684;&#x9898;&#x3002;&#x611F;&#x89C9;&#x80FD;&#x6BD4;&#x8F83;&#x597D;&#x7684;&#x8003;&#x5BDF;&#x5BF9;&#x8BFB;&#x5199;&#x9501;&#x539F;&#x7406;&#x7684;&#x7406;&#x89E3;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="03-ReentrantLock.html" class="navigation navigation-prev " aria-label="Previous page: 03-ReentrantLock">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="05-LockSupport.html" class="navigation navigation-next " aria-label="Next page: 05-LockSupport">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"04-ReentrantReadWriteLock","level":"1.5.4","depth":2,"next":{"title":"05-LockSupport","level":"1.5.5","depth":2,"path":"第03章-锁/05-LockSupport.md","ref":"第03章-锁/05-LockSupport.md","articles":[]},"previous":{"title":"03-ReentrantLock","level":"1.5.3","depth":2,"path":"第03章-锁/03-ReentrantLock.md","ref":"第03章-锁/03-ReentrantLock.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第03章-锁/04-ReentrantReadWriteLock.md","mtime":"2020-05-04T10:02:59.029Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T10:05:26.033Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

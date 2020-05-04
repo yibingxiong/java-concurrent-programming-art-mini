@@ -1,0 +1,680 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>08-ThreadLocal · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="09-原子类.html" />
+    
+    
+    <link rel="prev" href="07-线程的生命周期.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../第01章-在idea怎么调试jdk源码/">
+            
+                <a href="../第01章-在idea怎么调试jdk源码/">
+            
+                    
+                    第01章-在idea怎么调试jdk源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第02章-并发编程基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="01-线程的定义和意义.html">
+            
+                <a href="01-线程的定义和意义.html">
+            
+                    
+                    01-线程的定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="02-创建线程的三种方式.html">
+            
+                <a href="02-创建线程的三种方式.html">
+            
+                    
+                    02-创建线程的三种方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="03-线程的一些属性.html">
+            
+                <a href="03-线程的一些属性.html">
+            
+                    
+                    03-线程的一些属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="04-线程同步.html">
+            
+                <a href="04-线程同步.html">
+            
+                    
+                    04-线程同步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="05-线程间的通信.html">
+            
+                <a href="05-线程间的通信.html">
+            
+                    
+                    05-线程间的通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="06-控制线程.html">
+            
+                <a href="06-控制线程.html">
+            
+                    
+                    06-控制线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="07-线程的生命周期.html">
+            
+                <a href="07-线程的生命周期.html">
+            
+                    
+                    07-线程的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.8" data-path="08-ThreadLocal.html">
+            
+                <a href="08-ThreadLocal.html">
+            
+                    
+                    08-ThreadLocal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="09-原子类.html">
+            
+                <a href="09-原子类.html">
+            
+                    
+                    09-原子类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../第03章-锁/">
+            
+                <a href="../第03章-锁/">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../第03章-锁/">
+            
+                <a href="../第03章-锁/">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../第03章-锁/01-锁的基本使用.html">
+            
+                <a href="../第03章-锁/01-锁的基本使用.html">
+            
+                    
+                    01-锁的基本使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../第03章-锁/02-AQS.html">
+            
+                <a href="../第03章-锁/02-AQS.html">
+            
+                    
+                    02-AQS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../第03章-锁/03-ReentrantLock.html">
+            
+                <a href="../第03章-锁/03-ReentrantLock.html">
+            
+                    
+                    03-ReentrantLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../第03章-锁/04-ReentrantReadWriteLock.html">
+            
+                <a href="../第03章-锁/04-ReentrantReadWriteLock.html">
+            
+                    
+                    04-ReentrantReadWriteLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../第03章-锁/05-LockSupport.html">
+            
+                <a href="../第03章-锁/05-LockSupport.html">
+            
+                    
+                    05-LockSupport
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../第03章-锁/06-Condition.html">
+            
+                <a href="../第03章-锁/06-Condition.html">
+            
+                    
+                    06-Condition
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >08-ThreadLocal</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="thereadlocal">ThereadLocal</h1>
+<p>&#x662F;&#x4E00;&#x4E2A;&#x4EE5;ThreadLocal&#x5BF9;&#x8C61;&#x4E3A;&#x952E;&#x3001;&#x4EFB;&#x610F;&#x5BF9;&#x8C61;&#x4E3A;&#x503C;&#x7684;&#x5B58;&#x50A8;&#x7ED3;&#x6784;&#x3002;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x88AB;&#x9644;&#x5E26;&#x5728;&#x7EBF;&#x7A0B;&#x4E0A;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4E00;&#x4E2A;ThreadLocal&#x5BF9;&#x8C61;&#x67E5;&#x8BE2;&#x5230;&#x7ED1;&#x5B9A;&#x5728;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E0A;&#x7684;&#x4E00;&#x4E2A;&#x503C;&#x3002;</p>
+<h2 id="&#x4F7F;&#x7528;&#x793A;&#x4F8B;">&#x4F7F;&#x7528;&#x793A;&#x4F8B;</h2>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Profiler</span> </span>{
+    <span class="hljs-comment">// ThreadLocal&#x7684;&#x521B;&#x5EFA;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;Long&gt; threadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;Long&gt;(){
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">protected</span> Long <span class="hljs-title">initialValue</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> System.currentTimeMillis();
+        }
+
+    };
+
+    <span class="hljs-comment">// &#x8BB0;&#x5F55;&#x5F00;&#x59CB;&#x65F6;&#x95F4;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">begin</span><span class="hljs-params">()</span> </span>{
+        threadLocal.set(System.currentTimeMillis());
+    }
+
+    <span class="hljs-comment">// &#x8BB0;&#x5F55;&#x8017;&#x65F6;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Long <span class="hljs-title">end</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> System.currentTimeMillis() - threadLocal.get();
+    }
+}
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo_02_08_1_ThreadLocal</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            Profiler.begin();
+            <span class="hljs-keyword">long</span> sum = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">20</span>; i++) {
+                sum*=i;
+            }
+            System.out.println(sum);
+            System.out.println(Thread.currentThread().getName()+<span class="hljs-string">&quot;&#x8017;&#x65F6;=&quot;</span>+Profiler.end());
+        }).start();
+
+        <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            Profiler.begin();
+            <span class="hljs-keyword">int</span> sum = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">1000</span>; i++) {
+                sum+=i;
+                <span class="hljs-keyword">try</span> {
+                    Thread.sleep(<span class="hljs-number">1</span>);
+                } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(sum);
+            System.out.println(Thread.currentThread().getName()+<span class="hljs-string">&quot;&#x8017;&#x65F6;=&quot;</span>+Profiler.end());
+        }).start();
+    }
+}
+</code></pre>
+<h2 id="inheritablethreadlocal">InheritableThreadLocal</h2>
+<p>&#x8FD9;&#x79CD;ThreadLocal&#x53EF;&#x4EE5;&#x4ECE;&#x7236;&#x7EBF;&#x7A0B;&#x4F20;&#x5230;&#x5B50;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5B50;&#x7EBF;&#x7A0B;&#x80FD;&#x8BBF;&#x95EE;&#x7236;&#x7EBF;&#x7A0B;&#x4E2D;&#x7684;InheritableThreadLocal</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo_02_08_2_ThreadLocalInherit</span> </span>{
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestThreadLocalInherit</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span>{
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+            System.out.println(threadLocal.get()); <span class="hljs-comment">// null </span>
+            System.out.println(inheritableThreadLocal.get()); <span class="hljs-comment">// &#x6B22;&#x8FCE;&#x5173;&#x6CE8;&#x5FAE;&#x4FE1;&#x516C;&#x4F17;&#x53F7; &#x5927;&#x96C4;&#x548C;&#x4F60;&#x4E00;&#x8D77;&#x5B66;&#x7F16;&#x7A0B;</span>
+        }
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;Object&gt; threadLocal = <span class="hljs-keyword">new</span> ThreadLocal&lt;Object&gt;();
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InheritableThreadLocal&lt;Object&gt; inheritableThreadLocal = <span class="hljs-keyword">new</span> InheritableThreadLocal&lt;&gt;();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        inheritableThreadLocal.set(<span class="hljs-string">&quot;&#x6B22;&#x8FCE;&#x5173;&#x6CE8;&#x5FAE;&#x4FE1;&#x516C;&#x4F17;&#x53F7; &#x5927;&#x96C4;&#x548C;&#x4F60;&#x4E00;&#x8D77;&#x5B66;&#x7F16;&#x7A0B;&quot;</span>);
+        threadLocal.set(<span class="hljs-string">&quot;ddd&quot;</span>);
+        <span class="hljs-keyword">new</span> TestThreadLocalInherit().start();
+    }
+}
+</code></pre>
+<h2 id="&#x5B9E;&#x73B0;&#x539F;&#x7406;">&#x5B9E;&#x73B0;&#x539F;&#x7406;</h2>
+<p>&#x5F88;&#x5BB9;&#x6613;&#x60F3;&#x5230;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x4E1C;&#x897F;&#x662F;&#x8DDF;&#x7740;&#x7EBF;&#x7A0B;&#x8D70;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5E94;&#x8BE5;&#x662F;&#x7EBF;&#x7A0B;&#x7684;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x4E8B;&#x5B9E;&#x4E0A;&#x4E5F;&#x662F;&#x8FD9;&#x6837;&#xFF0C;ThreadLocal&#x548C;InheritableThreadLocal&#x90FD;&#x662F;&#x5B58;&#x50A8;&#x5728;Thread&#x91CC;&#x9762;&#x7684;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">/* ThreadLocal values pertaining to this thread. This map is maintained
+ * by the ThreadLocal class. */</span>
+ThreadLocal.ThreadLocalMap threadLocals = <span class="hljs-keyword">null</span>;
+
+<span class="hljs-comment">/*
+ * InheritableThreadLocal values pertaining to this thread. This map is
+ * maintained by the InheritableThreadLocal class.
+ */</span>
+ThreadLocal.ThreadLocalMap inheritableThreadLocals = <span class="hljs-keyword">null</span>;
+</code></pre>
+<p>&#x4E0A;&#x8FB9;&#x8FD9;&#x4E2A;&#x5C31;&#x662F;Thread&#x7684;&#x4E24;&#x4E2A;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF0C;&#x5176;&#x5B9E;&#x4E24;&#x4E2A;&#x662F;&#x4E00;&#x6837;&#x7684;&#x7C7B;&#x578B;&#x3002;</p>
+<p>ThreadLocalMap&#x662F;ThreadLocal&#x7684;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x4ED6;&#x91CC;&#x8FB9;&#x662F;&#x4E00;&#x4E2A;&#x7528;&#x4E00;&#x4E2A;Entry&#x6570;&#x7EC4;&#x6765;&#x5B58;&#x6570;&#x636E;&#x7684;&#x3002;set&#x65F6;&#x8BB2;ThreadLocal&#x4F5C;&#x4E3A;key&#xFF0C;&#x8981;&#x5B58;&#x7684;&#x503C;&#x4F20;&#x8FDB;&#x53BB;&#xFF0C;&#x4ED6;&#x4F1A;&#x5BF9;key&#x505A;&#x4E00;&#x4E2A;hash&#xFF0C;&#x6784;&#x5EFA;Entry,&#x653E;&#x5230;Entry&#x6570;&#x7EC4;&#x91CC;&#x8FB9;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x4F2A;&#x7801;</span>
+<span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadLocalMap</span> </span>{
+    <span class="hljs-comment">// &#x5185;&#x90E8;&#x7684;Entry&#x7ED3;&#x6784;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span> </span>{...}
+    <span class="hljs-comment">// &#x5B58;&#x6570;&#x636E;&#x7684;</span>
+    <span class="hljs-keyword">private</span> Entry[] table;
+    <span class="hljs-comment">// set</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(ThreadLocal&lt;?&gt; key, Object value)</span> </span>{
+        <span class="hljs-keyword">int</span> i = key.threadLocalHashCode &amp; (len-<span class="hljs-number">1</span>);
+        tab[i] = <span class="hljs-keyword">new</span> Entry(key, value);
+    }
+    <span class="hljs-comment">// get</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> Entry <span class="hljs-title">getEntry</span><span class="hljs-params">(ThreadLocal&lt;?&gt; key)</span> </span>{
+        <span class="hljs-keyword">int</span> i = key.threadLocalHashCode &amp; (table.length - <span class="hljs-number">1</span>);
+        Entry e = table[i];
+        <span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span> &amp;&amp; e.get() == key)
+            <span class="hljs-keyword">return</span> e;
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-keyword">return</span> getEntryAfterMiss(key, i, e);
+    }
+}
+</code></pre>
+<p>&#x518D;&#x6765;&#x770B;&#x770B;ThreadLocal&#x7684;get&#x65B9;&#x6CD5;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>{
+    Thread t = Thread.currentThread();
+    ThreadLocalMap map = getMap(t); <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x5C31;&#x662F;&#x62FF;&#x5230;&#x7684;&#x5B58;&#x5728;Thread&#x7684;threadLocals&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;</span>
+    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>) {
+        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x5C31;&#x662F;&#x6BEB;&#x65E0;&#x96BE;&#x5EA6;&#x7684;&#x4E8B;&#x60C5;&#x4E86;</span>
+        ThreadLocalMap.Entry e = map.getEntry(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">&quot;unchecked&quot;</span>)
+            T result = (T)e.value;
+            <span class="hljs-keyword">return</span> result;
+        }
+    }
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4ED6;&#x4F1A;&#x8C03;&#x4F60;&#x91CD;&#x5199;&#x7684;initialValue&#x65B9;&#x6CD5;&#xFF0C;&#x62FF;&#x5230;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;set&#x8FDB;&#x53BB;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x7ED9;&#x4F60;</span>
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x4E5F;&#x5F88;&#x6709;&#x8DA3;&#xFF0C;&#x4E00;&#x822C;init&#x5728;&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6210;&#xFF0C;&#x4F46;&#x662F;&#x4ED6;&#x662F;&#x5728;&#x4F60;&#x53D6;&#x7684;&#x65F6;&#x5019;&#x53BB;&#x8C03;</span>
+    <span class="hljs-keyword">return</span> setInitialValue();
+}
+</code></pre>
+<p>&#x518D;&#x6765;&#x770B;&#x770B;ThreadLocal&#x7684;set, &#x8D85;&#x7EA7;&#x7B80;&#x5355;,&#x4E0D;&#x591A;&#x8BF4;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>{
+    Thread t = Thread.currentThread();
+    ThreadLocalMap map = getMap(t);
+    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)
+        map.set(<span class="hljs-keyword">this</span>, value);
+    <span class="hljs-keyword">else</span>
+        createMap(t, value);
+}
+</code></pre>
+<p>ThreadLocal&#x770B;&#x5B8C;&#x4E86;&#xFF0C;&#x518D;&#x6765;&#x7785;&#x7785;InheritableThreadLocals,&#x770B;&#x770B;&#x4ED6;&#x662F;&#x600E;&#x4E48;&#x53EF;&#x4EE5;&#x4ECE;&#x7236;&#x7EBF;&#x7A0B;&#x90A3;&#x91CC;&#x62FF;&#x4E1C;&#x897F;&#x7684;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x7EE7;&#x627F;&#x4E86;ThreadLocal, &#x91CD;&#x5199;&#x4E86;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InheritableThreadLocal</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">ThreadLocal</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5728;ThreadLocal&#x662F;&#x76F4;&#x63A5;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;UnsupportedOperationException</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> T <span class="hljs-title">childValue</span><span class="hljs-params">(T parentValue)</span> </span>{
+        <span class="hljs-keyword">return</span> parentValue;
+    }
+    <span class="hljs-comment">// &#x8D85;&#x7B80;&#x5355;&#xFF0C;&#x6211;&#x4EEC;&#x7684;Map&#x4E0D;&#x8981;threadLocals&#x4E86;&#xFF0C;&#x6539;&#x4E3A;inheritableThreadLocals</span>
+    <span class="hljs-function">ThreadLocalMap <span class="hljs-title">getMap</span><span class="hljs-params">(Thread t)</span> </span>{
+       <span class="hljs-keyword">return</span> t.inheritableThreadLocals;
+    }
+    <span class="hljs-comment">// &#x540C;&#x4E0A;</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createMap</span><span class="hljs-params">(Thread t, T firstValue)</span> </span>{
+        t.inheritableThreadLocals = <span class="hljs-keyword">new</span> ThreadLocalMap(<span class="hljs-keyword">this</span>, firstValue);
+    }
+}
+</code></pre>
+<p>&#x53D1;&#x73B0;&#x4ED6;&#x548C;ThreadLocal&#x957F;&#x5F97;&#x5DEE;&#x4E0D;&#x591A;&#xFF0C;&#x5C31;&#x662F;&#x91CD;&#x5199;&#x4E86;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x7531;&#x6B64;&#x770B;&#x6765;&#x5173;&#x952E;&#x5728;inheritableThreadLocals&#x662F;&#x5982;&#x4F55;&#x4F20;&#x9012;&#x7684;</p>
+<p>&#x76F4;&#x63A5;&#x5728;Thread&#x91CC;&#x9762;&#x641C;inheritableThreadLocals</p>
+<p>&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x4ED6;&#x662F;&#x5728;init&#x65B9;&#x6CD5;&#x4E2D;&#x8D4B;&#x503C;&#x7684;&#xFF0C;&#x800C;init&#x5B9E;&#x5728;Thread&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x4E2D;&#x8C03;&#x7528;&#x7684;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x8FD9;&#x4E2A;parent&#x5C31;&#x662F; &#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x90A3;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x7236;&#x7EBF;&#x7A0B;</span>
+<span class="hljs-keyword">if</span> (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != <span class="hljs-keyword">null</span>)
+<span class="hljs-keyword">this</span>.inheritableThreadLocals = ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
+</code></pre>
+<p>&#x770B;&#x6765;&#x73B0;&#x5728;&#x5F97;&#x770B;&#x770B;ThreadLocal.createInheritedMap&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E86;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// parentMap&#x5C31;&#x662F;&#x7236;&#x7EBF;&#x7A0B;&#x7684;inheritableThreadLocals</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> ThreadLocalMap <span class="hljs-title">createInheritedMap</span><span class="hljs-params">(ThreadLocalMap parentMap)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadLocalMap(parentMap);
+}
+<span class="hljs-comment">// &#x53D1;&#x73B0;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;&#x628A;&#x7236;&#x7EBF;&#x7A0B;&#x7684;&#x4E1C;&#x897F;&#x5230;&#x81EA;&#x5DF1;&#x7EBF;&#x7A0B;&#x7684;inheritableThreadLocals&#x91CC;&#x8FB9;</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">ThreadLocalMap</span><span class="hljs-params">(ThreadLocalMap parentMap)</span> </span>{
+    Entry[] parentTable = parentMap.table;
+    <span class="hljs-keyword">int</span> len = parentTable.length;
+    setThreshold(len);
+    table = <span class="hljs-keyword">new</span> Entry[len];
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; len; j++) {
+        Entry e = parentTable[j];
+        <span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">&quot;unchecked&quot;</span>)
+            ThreadLocal&lt;Object&gt; key = (ThreadLocal&lt;Object&gt;) e.get();
+            <span class="hljs-keyword">if</span> (key != <span class="hljs-keyword">null</span>) {
+                Object value = key.childValue(e.value);
+                Entry c = <span class="hljs-keyword">new</span> Entry(key, value);
+                <span class="hljs-keyword">int</span> h = key.threadLocalHashCode &amp; (len - <span class="hljs-number">1</span>);
+                <span class="hljs-keyword">while</span> (table[h] != <span class="hljs-keyword">null</span>)
+                    h = nextIndex(h, len);
+                table[h] = c;
+                size++;
+            }
+        }
+    }
+}
+</code></pre>
+<p><strong>&#x603B;&#x7ED3;&#x4E00;&#x4E0B;</strong></p>
+<p>ThreadLocal&#x548C;InheritableThreadLocal&#x662F;&#x57FA;&#x4E8E;&#x5728;Thread&#x91CC;&#x8FB9;&#x7684;&#x4E24;&#x4E2A;&#x53D8;&#x91CF;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x53D8;&#x91CF;&#x7C7B;&#x4F3C;&#x4E8E;&#x4E00;&#x4E2A;HashMap&#x7684;&#x7ED3;&#x6784;ThreadLocalMap&#xFF0C;&#x91CC;&#x8FB9;&#x7684;Entry key&#x4E3A;ThreadLocal, value&#x4E3A;&#x4F60;&#x5B58;&#x7684;&#x503C;. InheritableThreadLocal&#x7684;&#x5B9E;&#x73B0;&#x4E3B;&#x8981;&#x662F;&#x5728;&#x7EBF;&#x7A0B;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x7236;&#x7EBF;&#x7A0B;&#x6709;inheritableThreadLocal, &#x4F1A;&#x88AB;&#x62F7;&#x8D1D;&#x5230;&#x5B50;&#x7EBF;&#x7A0B;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="07-线程的生命周期.html" class="navigation navigation-prev " aria-label="Previous page: 07-线程的生命周期">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="09-原子类.html" class="navigation navigation-next " aria-label="Next page: 09-原子类">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"08-ThreadLocal","level":"1.3.8","depth":2,"next":{"title":"09-原子类","level":"1.3.9","depth":2,"path":"第02章-并发编程基础/09-原子类.md","ref":"第02章-并发编程基础/09-原子类.md","articles":[]},"previous":{"title":"07-线程的生命周期","level":"1.3.7","depth":2,"path":"第02章-并发编程基础/07-线程的生命周期.md","ref":"第02章-并发编程基础/07-线程的生命周期.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第02章-并发编程基础/08-ThreadLocal.md","mtime":"2020-05-04T10:02:59.023Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T10:05:26.033Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

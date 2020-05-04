@@ -1,0 +1,491 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第02章-并发编程基础 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="01-线程的定义和意义.html" />
+    
+    
+    <link rel="prev" href="../第01章-在idea怎么调试jdk源码/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../第01章-在idea怎么调试jdk源码/">
+            
+                <a href="../第01章-在idea怎么调试jdk源码/">
+            
+                    
+                    第01章-在idea怎么调试jdk源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第02章-并发编程基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="01-线程的定义和意义.html">
+            
+                <a href="01-线程的定义和意义.html">
+            
+                    
+                    01-线程的定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="02-创建线程的三种方式.html">
+            
+                <a href="02-创建线程的三种方式.html">
+            
+                    
+                    02-创建线程的三种方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="03-线程的一些属性.html">
+            
+                <a href="03-线程的一些属性.html">
+            
+                    
+                    03-线程的一些属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="04-线程同步.html">
+            
+                <a href="04-线程同步.html">
+            
+                    
+                    04-线程同步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="05-线程间的通信.html">
+            
+                <a href="05-线程间的通信.html">
+            
+                    
+                    05-线程间的通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="06-控制线程.html">
+            
+                <a href="06-控制线程.html">
+            
+                    
+                    06-控制线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="07-线程的生命周期.html">
+            
+                <a href="07-线程的生命周期.html">
+            
+                    
+                    07-线程的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="08-ThreadLocal.html">
+            
+                <a href="08-ThreadLocal.html">
+            
+                    
+                    08-ThreadLocal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="09-原子类.html">
+            
+                <a href="09-原子类.html">
+            
+                    
+                    09-原子类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../第03章-锁/">
+            
+                <a href="../第03章-锁/">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../第03章-锁/">
+            
+                <a href="../第03章-锁/">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../第03章-锁/01-锁的基本使用.html">
+            
+                <a href="../第03章-锁/01-锁的基本使用.html">
+            
+                    
+                    01-锁的基本使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../第03章-锁/02-AQS.html">
+            
+                <a href="../第03章-锁/02-AQS.html">
+            
+                    
+                    02-AQS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../第03章-锁/03-ReentrantLock.html">
+            
+                <a href="../第03章-锁/03-ReentrantLock.html">
+            
+                    
+                    03-ReentrantLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../第03章-锁/04-ReentrantReadWriteLock.html">
+            
+                <a href="../第03章-锁/04-ReentrantReadWriteLock.html">
+            
+                    
+                    04-ReentrantReadWriteLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../第03章-锁/05-LockSupport.html">
+            
+                <a href="../第03章-锁/05-LockSupport.html">
+            
+                    
+                    05-LockSupport
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../第03章-锁/06-Condition.html">
+            
+                <a href="../第03章-锁/06-Condition.html">
+            
+                    
+                    06-Condition
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第02章-并发编程基础</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B2C;02&#x7AE0;-&#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x57FA;&#x7840;">&#x7B2C;02&#x7AE0;-&#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x57FA;&#x7840;</h1>
+<p>&#x9996;&#x5148;&#x80FD;&#x591F;&#x628A;&#x591A;&#x7EBF;&#x7A0B;&#x7A0B;&#x5E8F;&#x8DD1;&#x8D77;&#x6765;&#xFF0C;&#x611F;&#x89C9;&#x4F1A;&#x6709;&#x4E00;&#x4E9B;&#x6210;&#x5C31;&#x611F;&#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x4E9B;&#x4FE1;&#x5FC3;&#x5427;&#x3002;</p>
+<p>&#x672C;&#x7AE0;&#x5C31;&#x662F;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x6BD4;&#x5982;&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7528;&#x591A;&#x7EBF;&#x7A0B;&#xFF0C;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#xFF0C;&#x5982;&#x4F55;&#x542F;&#x52A8;&#xFF0C;&#x5982;&#x4F55;&#x540C;&#x6B65;&#xFF0C;&#x5982;&#x4F55;&#x901A;&#x4FE1;&#xFF0C;&#x7EBF;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x662F;&#x600E;&#x6837;&#x7684;&#x7B49;&#x7B49;&#xFF0C;&#x671F;&#x671B;&#x80FD;&#x591F;&#x5FEB;&#x901F;&#x7684;&#x628A;&#x591A;&#x7EBF;&#x7A0B;&#x8DD1;&#x8D77;&#x6765;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../第01章-在idea怎么调试jdk源码/" class="navigation navigation-prev " aria-label="Previous page: 第01章-在idea怎么调试jdk源码">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="01-线程的定义和意义.html" class="navigation navigation-next " aria-label="Next page: 01-线程的定义和意义">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第02章-并发编程基础","level":"1.3","depth":1,"next":{"title":"01-线程的定义和意义","level":"1.3.1","depth":2,"path":"第02章-并发编程基础/01-线程的定义和意义.md","ref":"第02章-并发编程基础/01-线程的定义和意义.md","articles":[]},"previous":{"title":"第01章-在idea怎么调试jdk源码","level":"1.2","depth":1,"path":"第01章-在idea怎么调试jdk源码/README.md","ref":"第01章-在idea怎么调试jdk源码/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第02章-并发编程基础/README.md","mtime":"2020-05-04T10:02:59.024Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T10:05:26.033Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

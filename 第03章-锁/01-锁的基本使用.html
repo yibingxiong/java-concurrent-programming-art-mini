@@ -1,0 +1,560 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>01-锁的基本使用 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="02-AQS.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../第01章-在idea怎么调试jdk源码/">
+            
+                <a href="../第01章-在idea怎么调试jdk源码/">
+            
+                    
+                    第01章-在idea怎么调试jdk源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../第02章-并发编程基础/">
+            
+                <a href="../第02章-并发编程基础/">
+            
+                    
+                    第02章-并发编程基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../第02章-并发编程基础/01-线程的定义和意义.html">
+            
+                <a href="../第02章-并发编程基础/01-线程的定义和意义.html">
+            
+                    
+                    01-线程的定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../第02章-并发编程基础/02-创建线程的三种方式.html">
+            
+                <a href="../第02章-并发编程基础/02-创建线程的三种方式.html">
+            
+                    
+                    02-创建线程的三种方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../第02章-并发编程基础/03-线程的一些属性.html">
+            
+                <a href="../第02章-并发编程基础/03-线程的一些属性.html">
+            
+                    
+                    03-线程的一些属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../第02章-并发编程基础/04-线程同步.html">
+            
+                <a href="../第02章-并发编程基础/04-线程同步.html">
+            
+                    
+                    04-线程同步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../第02章-并发编程基础/05-线程间的通信.html">
+            
+                <a href="../第02章-并发编程基础/05-线程间的通信.html">
+            
+                    
+                    05-线程间的通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../第02章-并发编程基础/06-控制线程.html">
+            
+                <a href="../第02章-并发编程基础/06-控制线程.html">
+            
+                    
+                    06-控制线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../第02章-并发编程基础/07-线程的生命周期.html">
+            
+                <a href="../第02章-并发编程基础/07-线程的生命周期.html">
+            
+                    
+                    07-线程的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../第02章-并发编程基础/08-ThreadLocal.html">
+            
+                <a href="../第02章-并发编程基础/08-ThreadLocal.html">
+            
+                    
+                    08-ThreadLocal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../第02章-并发编程基础/09-原子类.html">
+            
+                <a href="../第02章-并发编程基础/09-原子类.html">
+            
+                    
+                    09-原子类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="01-锁的基本使用.html">
+            
+                <a href="01-锁的基本使用.html">
+            
+                    
+                    01-锁的基本使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="02-AQS.html">
+            
+                <a href="02-AQS.html">
+            
+                    
+                    02-AQS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="03-ReentrantLock.html">
+            
+                <a href="03-ReentrantLock.html">
+            
+                    
+                    03-ReentrantLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="04-ReentrantReadWriteLock.html">
+            
+                <a href="04-ReentrantReadWriteLock.html">
+            
+                    
+                    04-ReentrantReadWriteLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="05-LockSupport.html">
+            
+                <a href="05-LockSupport.html">
+            
+                    
+                    05-LockSupport
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="06-Condition.html">
+            
+                <a href="06-Condition.html">
+            
+                    
+                    06-Condition
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >01-锁的基本使用</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x9501;&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;">&#x9501;&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;</h1>
+<p>&#x9501;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x5B9E;&#x73B0;Lock&#x63A5;&#x53E3;&#xFF0C;&#x6240;&#x4EE5;&#x4E86;&#x89E3;Lock&#x63A5;&#x53E3;&#x7684;API&#xFF0C;&#x57FA;&#x672C;&#x5C31;&#x4F1A;&#x7528;&#x9501;&#x4E86;&#x3002;</p>
+<h2 id="lock&#x63A5;&#x53E3;">Lock&#x63A5;&#x53E3;</h2>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void lock()</td>
+<td>&#x83B7;&#x53D6;&#x9501;&#x3002;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x4F1A;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x76F4;&#x5230;&#x9501;&#x83B7;&#x53D6;&#x540E;&#x8FD4;&#x56DE;</td>
+</tr>
+<tr>
+<td>void lockInterruptibly() throws InterruptedException</td>
+<td>&#x53EF;&#x4E2D;&#x65AD;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5728;&#x83B7;&#x53D6;&#x9501;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x4EE5;&#x88AB;&#x4E2D;&#x65AD;&#xFF0C;&#x88AB;&#x4E2D;&#x65AD;&#x540E;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x8FD4;&#x56DE;</td>
+</tr>
+<tr>
+<td>boolean tryLock()</td>
+<td>&#x5C1D;&#x8BD5;&#x975E;&#x963B;&#x585E;&#x7684;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x62FF;&#x5230;&#x9501;&#x8FD4;&#x56DE;true&#xFF0C;&#x5426;&#x5219;false</td>
+</tr>
+<tr>
+<td>boolean tryLock(long time, TimeUnit unit) throws InterruptedException</td>
+<td>&#x8D85;&#x65F6;&#x7684;&#x83B7;&#x53D6;&#x9501;<br>&#x8FD4;&#x56DE;&#x7684;&#x60C5;&#x51B5;<br>1. &#x5728;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x5185;&#x83B7;&#x53D6;&#x5230;&#x4E86;&#x9501;&#xFF0C;&#x8FD4;&#x56DE;true<br>2. &#x88AB;&#x4E2D;&#x65AD;&#x4E86;&#xFF0C;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x8FD4;&#x56DE;<br>3. &#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x5230;&#xFF0C;&#x8FD4;&#x56DE;false</td>
+</tr>
+<tr>
+<td>void unlock()</td>
+<td>&#x91CA;&#x653E;&#x9501;</td>
+</tr>
+<tr>
+<td>Condition newCondition()</td>
+<td>&#x83B7;&#x53D6;&#x7B49;&#x5F85;&#x901A;&#x77E5;&#x7EC4;&#x4EF6;&#xFF0C;&#x53EA;&#x6709;&#x62FF;&#x5230;&#x4E86;&#x9501;&#xFF0C;&#x624D;&#x80FD;&#x62FF;&#x5230;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x8C03;&#x7528;wait()&#x65B9;&#x6CD5;&#xFF0C;&#x8C03;&#x7528;&#x540E;&#x91CA;&#x653E;&#x9501;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5E26;try&#x7684;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x5C31;&#x662F;&#x62FF;&#x7684;&#x5230;&#x5C31;&#x62FF;&#xFF0C;&#x62FF;&#x4E0D;&#x5230;&#x5C31;&#x7B97;&#x4E86;&#xFF0C;&#x4F1A;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF1B;&#x8FD9;&#x4E2A;&#x5C31;&#x60F3;&#x5B66;&#x4E60;&#x4E00;&#x6837;&#xFF0C;&#x5B66;&#x7684;&#x4F1A;&#x5C31;&#x5B66;&#xFF0C;&#x5B66;&#x4E0D;&#x4F1A;&#x5C31;&#x7B97;&#x4E86;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x89C2;&#x70B9;&#x4E86;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x548C;synchronized&#x76F8;&#x6BD4;Lock&#x8981;&#x7075;&#x6D3B;&#x548C;&#x5F3A;&#x5927;&#xFF0C;&#x4F7F;&#x7528;&#x4F1A;&#x7A0D;&#x5FAE;&#x9EBB;&#x70E6;&#x4E00;&#x70B9;&#xFF1A;</p>
+<ol>
+<li>synchronized&#x662F;&#x9690;&#x5F0F;&#x83B7;&#x53D6;&#x91CA;&#x653E;&#x9501;&#xFF0C;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x548C;&#x56FA;&#x5B9A;&#xFF0C;Lock&#x662F;&#x9700;&#x8981;&#x624B;&#x52A8;&#x83B7;&#x53D6;&#x9501;&#x548C;&#x91CA;&#x653E;&#xFF0C;&#x6BD4;&#x8F83;&#x7075;&#x6D3B;</li>
+<li>Lock&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x975E;&#x963B;&#x585E;&#x83B7;&#x53D6;&#x9501;&#x3001;&#x80FD;&#x88AB;&#x4E2D;&#x65AD;&#x7684;&#x83B7;&#x53D6;&#x9501;&#x3001;&#x80FD;&#x591F;&#x5E26;&#x8D85;&#x65F6;&#x7684;&#x83B7;&#x53D6;&#x9501;&#xFF0C; synchronized&#x4E0D;&#x80FD;&#x505A;&#x5230;</li>
+</ol>
+<h2 id="&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;">&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;</h2>
+<pre><code class="lang-java"><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span> </span>{
+    <span class="hljs-comment">// &#x641E;&#x4E2A;&#x53EF;&#x91CD;&#x5165;&#x9501;&#x7EC3;&#x624B;</span>
+    <span class="hljs-keyword">private</span> Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();
+    <span class="hljs-keyword">private</span> Integer money;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Account</span><span class="hljs-params">(Integer money)</span> </span>{
+        <span class="hljs-keyword">this</span>.money = money;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">draw</span><span class="hljs-params">(<span class="hljs-keyword">int</span> count)</span> </span>{
+        <span class="hljs-comment">// &#x52A0;&#x9501;&#x4E0D;&#x8981;&#x653E;&#x5230;try&#x91CC;&#x8FB9;&#xFF0C;&#x56E0;&#x4E3A;&#x5982;&#x679C;&#x5728;&#x83B7;&#x53D6;&#x9501;&#xFF08;&#x81EA;&#x5B9A;&#x4E49;&#x9501;&#x7684;&#x5B9E;&#x73B0;&#xFF09;&#x65F6;&#x53D1;&#x751F;&#x4E86;&#x5F02;&#x5E38;&#xFF0C;&#x5F02;&#x5E38;&#x629B;&#x51FA;&#x7684;&#x540C;&#x65F6;&#xFF0C;&#x4E5F;&#x4F1A;&#x5BFC;&#x81F4;&#x9501;&#x65E0;&#x6545;&#x91CA;&#x653E;</span>
+        lock.lock();
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">if</span> (money &gt;= count) {
+                System.out.println(<span class="hljs-string">&quot;&#x53D6;&#x8D70;&quot;</span> + count);
+                money -= count;
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            } <span class="hljs-keyword">else</span> {
+                System.out.println(<span class="hljs-string">&quot;&#x94B1;&#x4E0D;&#x591F;&#x4E86;&#xFF0C;&#x53BB;&#x5173;&#x6CE8;&#x5FAE;&#x4FE1;&#x516C;&#x53F7;&#x2018;&#x5927;&#x96C4;&#x548C;&#x4F60;&#x4E00;&#x8D77;&#x5B66;&#x7F16;&#x7A0B;&#x2019;&#x5427;&quot;</span>);
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            }
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-comment">// &#x5199;&#x5230;finally&#xFF0C;&#x4FDD;&#x8BC1;&#x91CA;&#x653E;&#x9501;</span>
+            lock.unlock();
+        }
+    }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 第03章-锁">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="02-AQS.html" class="navigation navigation-next " aria-label="Next page: 02-AQS">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"01-锁的基本使用","level":"1.5.1","depth":2,"next":{"title":"02-AQS","level":"1.5.2","depth":2,"path":"第03章-锁/02-AQS.md","ref":"第03章-锁/02-AQS.md","articles":[]},"previous":{"title":"第03章-锁","level":"1.5","depth":1,"path":"第03章-锁/README.md","ref":"第03章-锁/README.md","articles":[{"title":"01-锁的基本使用","level":"1.5.1","depth":2,"path":"第03章-锁/01-锁的基本使用.md","ref":"第03章-锁/01-锁的基本使用.md","articles":[]},{"title":"02-AQS","level":"1.5.2","depth":2,"path":"第03章-锁/02-AQS.md","ref":"第03章-锁/02-AQS.md","articles":[]},{"title":"03-ReentrantLock","level":"1.5.3","depth":2,"path":"第03章-锁/03-ReentrantLock.md","ref":"第03章-锁/03-ReentrantLock.md","articles":[]},{"title":"04-ReentrantReadWriteLock","level":"1.5.4","depth":2,"path":"第03章-锁/04-ReentrantReadWriteLock.md","ref":"第03章-锁/04-ReentrantReadWriteLock.md","articles":[]},{"title":"05-LockSupport","level":"1.5.5","depth":2,"path":"第03章-锁/05-LockSupport.md","ref":"第03章-锁/05-LockSupport.md","articles":[]},{"title":"06-Condition","level":"1.5.6","depth":2,"path":"第03章-锁/06-Condition.md","ref":"第03章-锁/06-Condition.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第03章-锁/01-锁的基本使用.md","mtime":"2020-05-04T10:02:59.027Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-04T10:05:26.033Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
