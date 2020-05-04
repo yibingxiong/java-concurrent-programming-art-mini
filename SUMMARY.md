@@ -13,7 +13,6 @@
     * [08-ThreadLocal](第02章-并发编程基础/08-ThreadLocal.md)
     * [09-原子类](第02章-并发编程基础/09-原子类.md)
 * [第03章-锁](第03章-锁/README.md)
-* [第03章-锁](第03章-锁/README.md)
     * [01-锁的基本使用](第03章-锁/01-锁的基本使用.md)
     * [02-AQS](第03章-锁/02-AQS.md)
     * [03-ReentrantLock](第03章-锁/03-ReentrantLock.md)
