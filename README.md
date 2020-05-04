@@ -51,3 +51,11 @@
 
 1. 在“大雄和你一起学编程”公众号留言
 2. 在github[java-concurrent-programming-art-mini](https://github.com/yibingxiong/java-concurrent-programming-art-mini)上边提issue
+
+## 版权声明
+
+转载请在醒目位置注明如下信息:
+
+本文转自xxx,采用[《署名-非商业性使用-禁止演绎 4.0 国际》](https://creativecommons.org/licenses/by-nc-nd/4.0/)许可协议，欢迎关注微信公众号“大雄和你一些学编程”
+
+*xxx所转载文章的链接*
