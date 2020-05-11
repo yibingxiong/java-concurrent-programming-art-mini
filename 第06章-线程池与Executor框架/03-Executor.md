@@ -177,3 +177,158 @@ public ScheduledFuture<?> scheduleWithFixedDelay(Runnable command,
 
 ### 原理
 
+这个定时任务的核心就是使用DelayQueue，但是他不是使用的concurrent包的那个DelayQueue, 而是自己封装了一个DelayedWorkQueue，这两者的区别笔者没有细看，一直从任务队列取到期的任务执行，同时把执行的任务再放回DelayQueue。
+
+
+#### RunnableScheduledFuture
+
+
+DelayedWorkQueue 里面是用一个RunnableScheduledFuture来存放任务的， ScheduledFutureTask就是RunnableScheduledFuture的一个实现类
+
+他的成员变量如下：
+
+```java
+// 决定两个Task的time相同时谁排在前面，是用一个AtomicLong搞出来的
+private final long sequenceNumber;
+
+// Task下一次将要被执行的具体时间
+private long time;
+
+// 任务执行的间隔时间，正数表示用fixed-rate（scheduleAtFixedRate）方式， 负数表示用fixed-delay（scheduleWithFixedDelay）方式
+private final long period;
+
+// 用于下一次加入队列
+RunnableScheduledFuture<V> outerTask = this;
+
+// 优化用的
+int heapIndex;
+```
+
+方法如下：
+
+```java
+public long getDelay(TimeUnit unit) {
+    return unit.convert(time - now(), NANOSECONDS);
+}
+```
+
+计算还有多久到执行时间点，这个Delayed接口的getDelay方法一样
+
+```java
+public int compareTo(Delayed other) {
+    if (other == this) // compare zero if same object
+        return 0;
+    if (other instanceof ScheduledFutureTask) {
+        ScheduledFutureTask<?> x = (ScheduledFutureTask<?>)other;
+        long diff = time - x.time;
+        if (diff < 0)
+            return -1;
+        else if (diff > 0)
+            return 1;
+        else if (sequenceNumber < x.sequenceNumber)
+            return -1;
+        else
+            return 1;
+    }
+    long diff = getDelay(NANOSECONDS) - other.getDelay(NANOSECONDS);
+    return (diff < 0) ? -1 : (diff > 0) ? 1 : 0;
+}
+```
+
+确定排序规则，谁先到期谁排前面，同时到期的，看谁先创建，先创建的排在前面
+
+```java
+// 设置下一次要什么时候执行
+private void setNextRunTime() {
+    long p = period;
+    if (p > 0)
+        time += p;  // 以固定频率执行的任务走这里
+    else    // 以固定时间间隔执行的走这里
+        time = triggerTime(-p);
+}
+
+// 取消任务
+public boolean cancel(boolean mayInterruptIfRunning) {
+    boolean cancelled = super.cancel(mayInterruptIfRunning);
+    if (cancelled && removeOnCancel && heapIndex >= 0)
+        remove(this);
+    return cancelled;
+}
+
+public void run() {
+    boolean periodic = isPeriodic();
+    if (!canRunInCurrentRunState(periodic))
+        // 取消
+        cancel(false);
+    else if (!periodic)
+        // 不是周期任务，直接run就好, 执行的FutureTask的run， 执行具体的任务
+        ScheduledFutureTask.super.run();
+    else if (ScheduledFutureTask.super.runAndReset()) { // runAndReset()可以理解为就是开始执行任务
+        // 设置 下一次执行时间，注意固定频率和固定间隔的区别
+        setNextRunTime();
+        // 再返回队列
+        reExecutePeriodic(outerTask);
+    }
+}
+```
+
+#### scheduleAtFixedRate的执行流程
+
+```java
+public ScheduledFuture<?> scheduleAtFixedRate(Runnable command,
+                                                long initialDelay,
+                                                long period,
+                                                TimeUnit unit) {
+    // 一些参数校验
+    if (command == null || unit == null)
+        throw new NullPointerException();
+    if (period <= 0)
+        throw new IllegalArgumentException();
+
+    // 构造RunnableScheduledFuture
+    ScheduledFutureTask<Void> sft =
+        new ScheduledFutureTask<Void>(command,
+                                        null,
+                                        //
+                                        triggerTime(initialDelay, unit),
+                                        unit.toNanos(period));
+    RunnableScheduledFuture<Void> t = decorateTask(command, sft);
+    // 下一次加到队列的任务设置好
+    sft.outerTask = t;
+    // 延迟执行
+    delayedExecute(t);
+    return t;
+}
+
+private void delayedExecute(RunnableScheduledFuture<?> task) {
+    if (isShutdown())
+        reject(task);
+    else {
+        // 加入队列
+        super.getQueue().add(task);
+        if (isShutdown() &&
+            !canRunInCurrentRunState(task.isPeriodic()) &&
+            remove(task))
+            // 取消任务的情况
+            task.cancel(false);
+        else
+            // 准备开始跑了
+            ensurePrestart();
+    }
+}
+
+void ensurePrestart() {
+    // 看现在有几个工作线程
+    int wc = workerCountOf(ctl.get());
+    if (wc < corePoolSize)  // 当前worker小于核心线程数，加worker
+        addWorker(null, true);
+    else if (wc == 0)
+        // 如果没有的话，不管三七二十一，加worker
+        addWorker(null, false);
+
+    // 加worker以后线程就会启动去工作队列拿任务执行了， 这个普通的线程池是一样的
+}
+```
+
+scheduleWithFixedDelay和scheduleAtFixedRate是类似的，只是他计算下一次执行的时间的方式不同。
+
