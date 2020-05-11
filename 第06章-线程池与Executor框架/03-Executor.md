@@ -159,7 +159,21 @@ public static ExecutorService newSingleThreadExecutor()
 // 还有两个是可以指定线程工厂
 ```
 
-提交任务也有两种方式
+提交任务主要有两种方式
 
+```java
+// 他会每间隔一个固定时间执行一次，如果你的任务执行时间<=你给定的period, 那么每隔period时间会执行一次
+// 如果你的任务执行时间>你给的period, 那么任务执行完就开始下一次
+public ScheduledFuture<?> scheduleAtFixedRate(Runnable command,
+                                                  long initialDelay,
+                                                  long period,
+                                                  TimeUnit unit)
+// 他不管你的任务执行时间，任务执行完了再隔delay时间执行下一次任务
+public ScheduledFuture<?> scheduleWithFixedDelay(Runnable command,
+                                                     long initialDelay,
+                                                     long delay,
+                                                     TimeUnit unit)
 ```
-```
+
+### 原理
+
