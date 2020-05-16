@@ -29,6 +29,7 @@ for (let i = 0; i < dirs.length; i++) {
 
 console.log('提交git...')
 let date = new Date().toLocaleString();
-child_process.execSync(`git add --all && git commit -m "发布日期：${date}" && git push`);
-
+child_process.execSync(`git add --all && git commit -m "发布日期：${date}" && git push`)
+console.log('git checkout master')
+child_process.execSync(`git checkout master`)
 console.log('发布成功：' + date);
