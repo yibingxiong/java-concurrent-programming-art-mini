@@ -4,14 +4,16 @@ const ROOT_PATH = path.join(__dirname, '..')
 const child_process = require('child_process')
 const copydir = require('copy-dir');
 
+console.log('git checkout gh-pages')
 child_process.execSync('git checkout gh-pages')
+
+console.log('git merge master')
 child_process.execSync('git merge master')
+
+console.log('gitbook build...')
 child_process.execSync("gitbook build")
 
-console.log('编译中...')
-
-
-
+console.log('copy...')
 const BOOK_PATH = path.join(ROOT_PATH, '_book')
 const dirs = fs.readdirSync(BOOK_PATH)
 for (let i = 0; i < dirs.length; i++) {
@@ -25,4 +27,8 @@ for (let i = 0; i < dirs.length; i++) {
     }
 }
 
-child_process.execSync('git add --all && git commit -m "发布" && git push');
+console.log('提交git...')
+let date = new Date().toLocaleString();
+child_process.execSync(`git add --all && git commit -m "发布日期：${date}" && git push`);
+
+console.log('发布成功：' + date);
