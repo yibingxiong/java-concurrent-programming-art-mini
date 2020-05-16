@@ -4,7 +4,7 @@
   "description": "《java并发编程艺术》学习笔记，欢迎关注微信公众号“大雄和你一起学编程”一起探讨交流",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/index.js"
   },
   "repository": {
     "type": "git",
