@@ -46,11 +46,11 @@ for (let i = 0; i<dirs.length; i++) {
     }
 }
 
-console.log('输出目录如下：')
-console.log('=======================================')
-console.log(outputStr)
-console.log('=======================================')
+
 
 fs.writeFileSync(path.join(ROOT_PATH, 'SUMMARY.md'), outputStr, {encoding: 'utf-8'})
 
-console.log('输出成功');
+console.log('输出目录如下：')
+console.log('=======================================')
+console.log(outputStr)
+console.log('===============success========================')
