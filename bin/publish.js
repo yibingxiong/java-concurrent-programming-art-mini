@@ -25,3 +25,4 @@ for (let i = 0; i < dirs.length; i++) {
     }
 }
 
+child_process.execSync('git add --all && git commit -m "发布" && git push');
