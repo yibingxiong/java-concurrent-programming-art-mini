@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/yibingxiong/java-concurrent-programming-art-mini/issues"
   },
-  "homepage": "https://github.com/yibingxiong/java-concurrent-programming-art-mini#readme"
+  "homepage": "https://github.com/yibingxiong/java-concurrent-programming-art-mini#readme",
+  "dependencies": {
+    "copy-dir": "^1.2.0"
+  }
 }
