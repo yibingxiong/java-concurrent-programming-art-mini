@@ -1,0 +1,27 @@
+{
+  "name": "java-concurrent-programming-art-mini",
+  "version": "1.0.0",
+  "description": "《java并发编程艺术》学习笔记，欢迎关注微信公众号“大雄和你一起学编程”一起探讨交流",
+  "main": "index.js",
+  "scripts": {
+    "contents": "node bin/contents.js",
+    "publish": "node bin/publish.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yibingxiong/java-concurrent-programming-art-mini.git"
+  },
+  "keywords": [
+    "java并发编程艺术",
+    "学习笔记",
+    "微信公众号",
+    "大雄和你一起学编程",
+    "探讨交流"
+  ],
+  "author": "大雄和你一起学编程",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yibingxiong/java-concurrent-programming-art-mini/issues"
+  },
+  "homepage": "https://github.com/yibingxiong/java-concurrent-programming-art-mini#readme"
+}
