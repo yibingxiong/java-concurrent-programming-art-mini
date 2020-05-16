@@ -15,6 +15,8 @@ const BOOK_PATH = path.join(ROOT_PATH, '_book')
 const dirs = fs.readdirSync(BOOK_PATH)
 for (let i = 0; i < dirs.length; i++) {
     const dir = dirs[i]
-    fs.copyFileSync(path.join(BOOK_PATH, dir), path.join(BOOK_PATH, '..', dir));
+    if (dir!=='bin') {
+        fs.copyFileSync(path.join(BOOK_PATH, dir), path.join(BOOK_PATH, '..', dir));
+    }
 }
 
