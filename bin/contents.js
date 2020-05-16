@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const ROOT_PATH=path.join(__dirname, '..')
+const ROOT_PATH = path.join(__dirname, '..')
 
-const dirs = fs.readdirSync(ROOT_PATH, {encoding: 'utf-8'}).sort();
+const dirs = fs.readdirSync(ROOT_PATH, { encoding: 'utf-8' }).sort();
 
 /*
 * [前言](README.md)
@@ -25,20 +25,20 @@ let outputStr = `
 * [前言](README.md)
 `;
 
-for (let i = 0; i<dirs.length; i++) {
+for (let i = 0; i < dirs.length; i++) {
     let dir = dirs[i];
     if (/^第\d+章/.test(dir)) {
-       outputStr+= `
+        outputStr += `
 * [${dir}](${dir}/README.md)
         `;
 
         const chapterPath = path.join(ROOT_PATH, dir);
-        const sections = fs.readdirSync(chapterPath, {encoding: 'utf-8'}).sort();
-        for (let j = 0; j<sections.length; j++) {
+        const sections = fs.readdirSync(chapterPath, { encoding: 'utf-8' }).sort();
+        for (let j = 0; j < sections.length; j++) {
             const section = sections[j];
             if (/^\d+/.test(section)) {
                 const sectionName = section.substring(0, section.lastIndexOf('.'));
-                outputStr+=`
+                outputStr += `
     * [${sectionName}](${dir}/${section})
                 `
             }
@@ -48,7 +48,7 @@ for (let i = 0; i<dirs.length; i++) {
 
 
 
-fs.writeFileSync(path.join(ROOT_PATH, 'SUMMARY.md'), outputStr, {encoding: 'utf-8'})
+fs.writeFileSync(path.join(ROOT_PATH, 'SUMMARY.md'), outputStr, { encoding: 'utf-8' })
 
 console.log('输出目录如下：')
 console.log('=======================================')
