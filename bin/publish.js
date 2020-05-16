@@ -4,11 +4,11 @@ const ROOT_PATH = path.join(__dirname, '..')
 const child_process = require('child_process')
 const copydir = require('copy-dir');
 
-child_process.execSync('git checkout gh-pages')
-child_process.execSync('git merge master')
+// child_process.execSync('git checkout gh-pages')
+// child_process.execSync('git merge master')
+console.log('编译中...')
 child_process.execSync("gitbook build")
 
-console.log('编译中...')
 
 
 

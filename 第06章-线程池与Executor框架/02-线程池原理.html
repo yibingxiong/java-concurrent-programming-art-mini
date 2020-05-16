@@ -1,0 +1,1198 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>02-线程池原理 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="03-Executor.html" />
+    
+    
+    <link rel="prev" href="01-使用线程池.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../第01章-在idea怎么调试jdk源码/">
+            
+                <a href="../第01章-在idea怎么调试jdk源码/">
+            
+                    
+                    第01章-在idea怎么调试jdk源码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../第02章-并发编程基础/">
+            
+                <a href="../第02章-并发编程基础/">
+            
+                    
+                    第02章-并发编程基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../第02章-并发编程基础/01-线程的定义和意义.html">
+            
+                <a href="../第02章-并发编程基础/01-线程的定义和意义.html">
+            
+                    
+                    01-线程的定义和意义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../第02章-并发编程基础/02-创建线程的三种方式.html">
+            
+                <a href="../第02章-并发编程基础/02-创建线程的三种方式.html">
+            
+                    
+                    02-创建线程的三种方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../第02章-并发编程基础/03-线程的一些属性.html">
+            
+                <a href="../第02章-并发编程基础/03-线程的一些属性.html">
+            
+                    
+                    03-线程的一些属性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../第02章-并发编程基础/04-线程同步.html">
+            
+                <a href="../第02章-并发编程基础/04-线程同步.html">
+            
+                    
+                    04-线程同步
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../第02章-并发编程基础/05-线程间的通信.html">
+            
+                <a href="../第02章-并发编程基础/05-线程间的通信.html">
+            
+                    
+                    05-线程间的通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../第02章-并发编程基础/06-控制线程.html">
+            
+                <a href="../第02章-并发编程基础/06-控制线程.html">
+            
+                    
+                    06-控制线程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../第02章-并发编程基础/07-线程的生命周期.html">
+            
+                <a href="../第02章-并发编程基础/07-线程的生命周期.html">
+            
+                    
+                    07-线程的生命周期
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../第02章-并发编程基础/08-ThreadLocal.html">
+            
+                <a href="../第02章-并发编程基础/08-ThreadLocal.html">
+            
+                    
+                    08-ThreadLocal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../第02章-并发编程基础/09-原子类.html">
+            
+                <a href="../第02章-并发编程基础/09-原子类.html">
+            
+                    
+                    09-原子类
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../第03章-锁/">
+            
+                <a href="../第03章-锁/">
+            
+                    
+                    第03章-锁
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../第03章-锁/01-锁的基本使用.html">
+            
+                <a href="../第03章-锁/01-锁的基本使用.html">
+            
+                    
+                    01-锁的基本使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../第03章-锁/02-AQS.html">
+            
+                <a href="../第03章-锁/02-AQS.html">
+            
+                    
+                    02-AQS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../第03章-锁/03-ReentrantLock.html">
+            
+                <a href="../第03章-锁/03-ReentrantLock.html">
+            
+                    
+                    03-ReentrantLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../第03章-锁/04-ReentrantReadWriteLock.html">
+            
+                <a href="../第03章-锁/04-ReentrantReadWriteLock.html">
+            
+                    
+                    04-ReentrantReadWriteLock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../第03章-锁/05-LockSupport.html">
+            
+                <a href="../第03章-锁/05-LockSupport.html">
+            
+                    
+                    05-LockSupport
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../第03章-锁/06-Condition.html">
+            
+                <a href="../第03章-锁/06-Condition.html">
+            
+                    
+                    06-Condition
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../第04章-并发容器/">
+            
+                <a href="../第04章-并发容器/">
+            
+                    
+                    第04章-并发容器
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../第04章-并发容器/01-ConcurrentHashMap.html">
+            
+                <a href="../第04章-并发容器/01-ConcurrentHashMap.html">
+            
+                    
+                    01-ConcurrentHashMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../第04章-并发容器/02-ConcurrentLinkedQueue.html">
+            
+                <a href="../第04章-并发容器/02-ConcurrentLinkedQueue.html">
+            
+                    
+                    02-ConcurrentLinkedQueue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../第04章-并发容器/03-ConcurrentLinkedDeque.html">
+            
+                <a href="../第04章-并发容器/03-ConcurrentLinkedDeque.html">
+            
+                    
+                    03-ConcurrentLinkedDeque
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../第04章-并发容器/04-两个基于跳表的容器.html">
+            
+                <a href="../第04章-并发容器/04-两个基于跳表的容器.html">
+            
+                    
+                    04-两个基于跳表的容器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../第04章-并发容器/05-CopyOnWrite系列.html">
+            
+                <a href="../第04章-并发容器/05-CopyOnWrite系列.html">
+            
+                    
+                    05-CopyOnWrite系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../第05章-阻塞队列/">
+            
+                <a href="../第05章-阻塞队列/">
+            
+                    
+                    第05章-阻塞队列
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../第05章-阻塞队列/01-阻塞队列的通用操作.html">
+            
+                <a href="../第05章-阻塞队列/01-阻塞队列的通用操作.html">
+            
+                    
+                    01-阻塞队列的通用操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../第05章-阻塞队列/02-各种阻塞队列的特点与应用.html">
+            
+                <a href="../第05章-阻塞队列/02-各种阻塞队列的特点与应用.html">
+            
+                    
+                    02-各种阻塞队列的特点与应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../第05章-阻塞队列/03-阻塞队列实现原理.html">
+            
+                <a href="../第05章-阻塞队列/03-阻塞队列实现原理.html">
+            
+                    
+                    03-阻塞队列实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第06章-线程池与Executor框架
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="01-使用线程池.html">
+            
+                <a href="01-使用线程池.html">
+            
+                    
+                    01-使用线程池
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2" data-path="02-线程池原理.html">
+            
+                <a href="02-线程池原理.html">
+            
+                    
+                    02-线程池原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="03-Executor.html">
+            
+                <a href="03-Executor.html">
+            
+                    
+                    03-Executor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../第07章-并发工具类/README.md">
+            
+                <span>
+            
+                    
+                    第07章-并发工具类
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../第07章-并发工具类/01-CountDownLatch.html">
+            
+                <a href="../第07章-并发工具类/01-CountDownLatch.html">
+            
+                    
+                    01-CountDownLatch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../第07章-并发工具类/02-CyclicBarrier.html">
+            
+                <a href="../第07章-并发工具类/02-CyclicBarrier.html">
+            
+                    
+                    02-CyclicBarrier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../第07章-并发工具类/03-Semaphore.html">
+            
+                <a href="../第07章-并发工具类/03-Semaphore.html">
+            
+                    
+                    03-Semaphore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../第07章-并发工具类/04-Exchanger.html">
+            
+                <a href="../第07章-并发工具类/04-Exchanger.html">
+            
+                    
+                    04-Exchanger
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../第08章-Java并发机制的底层实现原理/">
+            
+                <a href="../第08章-Java并发机制的底层实现原理/">
+            
+                    
+                    第08章-Java并发机制的底层实现原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../第08章-Java并发机制的底层实现原理/01-volatile.html">
+            
+                <a href="../第08章-Java并发机制的底层实现原理/01-volatile.html">
+            
+                    
+                    01-volatile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../第08章-Java并发机制的底层实现原理/02-synchronized.html">
+            
+                <a href="../第08章-Java并发机制的底层实现原理/02-synchronized.html">
+            
+                    
+                    02-synchronized
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../第08章-Java并发机制的底层实现原理/03-原子操作的实现原理.html">
+            
+                <a href="../第08章-Java并发机制的底层实现原理/03-原子操作的实现原理.html">
+            
+                    
+                    03-原子操作的实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../第09章-java内存模型/">
+            
+                <a href="../第09章-java内存模型/">
+            
+                    
+                    第09章-java内存模型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../第09章-java内存模型/01-java内存模型基础.html">
+            
+                <a href="../第09章-java内存模型/01-java内存模型基础.html">
+            
+                    
+                    01-java内存模型基础
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../第09章-java内存模型/02-重排序.html">
+            
+                <a href="../第09章-java内存模型/02-重排序.html">
+            
+                    
+                    02-重排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../第09章-java内存模型/03-volatile内存语义.html">
+            
+                <a href="../第09章-java内存模型/03-volatile内存语义.html">
+            
+                    
+                    03-volatile内存语义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../第09章-java内存模型/04-锁内存语义的实现.html">
+            
+                <a href="../第09章-java内存模型/04-锁内存语义的实现.html">
+            
+                    
+                    04-锁内存语义的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../第09章-java内存模型/05-concurrent包的实现.html">
+            
+                <a href="../第09章-java内存模型/05-concurrent包的实现.html">
+            
+                    
+                    05-concurrent包的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../第09章-java内存模型/06-final域的内存语义.html">
+            
+                <a href="../第09章-java内存模型/06-final域的内存语义.html">
+            
+                    
+                    06-final域的内存语义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../第09章-java内存模型/07-happens-before.html">
+            
+                <a href="../第09章-java内存模型/07-happens-before.html">
+            
+                    
+                    07-happens-before
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >02-线程池原理</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7EBF;&#x7A0B;&#x6C60;&#x539F;&#x7406;">&#x7EBF;&#x7A0B;&#x6C60;&#x539F;&#x7406;</h1>
+<h2 id="&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x7406;&#x6D41;&#x7A0B;">&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x7406;&#x6D41;&#x7A0B;</h2>
+<p><img src="images/&#x7EBF;&#x7A0B;&#x6C60;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x6D41;&#x7A0B;.png" alt="&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x7406;&#x6D41;&#x7A0B;"></p>
+<h2 id="&#x539F;&#x7406;&#x89E3;&#x6790;">&#x539F;&#x7406;&#x89E3;&#x6790;</h2>
+<h3 id="&#x4E92;&#x8054;&#x7F51;&#x516C;&#x53F8;&#x4E0E;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x5173;&#x7CFB;">&#x4E92;&#x8054;&#x7F51;&#x516C;&#x53F8;&#x4E0E;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x5173;&#x7CFB;</h3>
+<p>&#x8FD9;&#x91CC;&#x7528;&#x4E00;&#x4E2A;&#x6BD4;&#x55BB;&#x6765;&#x63CF;&#x8FF0;&#x4E00;&#x4E0B;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x4E2D;&#x95F4;&#x6709;&#x4E00;&#x4E9B;&#x540D;&#x8BCD;&#x4F60;&#x53EF;&#x80FD;&#x4E0D;&#x662F;&#x592A;&#x6E05;&#x695A;&#xFF0C;&#x540E;&#x8FB9;&#x6E90;&#x7801;&#x89E3;&#x6790;&#x7684;&#x90E8;&#x5206;&#x4F1A;&#x8BB2;&#x5230;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x628A;<strong>&#x7EBF;&#x7A0B;&#x6C60;</strong>&#x770B;&#x4F5C;&#x662F;&#x4E00;&#x4E2A;<strong>&#x7814;&#x53D1;&#x90E8;&#x95E8;</strong>&#xFF0C;&#x7814;&#x53D1;&#x90E8;&#x95E8;&#x6709;&#x5F88;&#x591A;<strong>&#x7A0B;&#x5E8F;&#x5458;&#xFF08;Worker)</strong>, &#x4ED6;&#x4EEC;&#x5728;&#x4E00;&#x4E2A;<strong>&#x5927;&#x529E;&#x516C;&#x5BA4;&#x91CC;&#xFF08;HashSet workers)</strong>&#x3002;&#x7A0B;&#x5E8F;&#x5458;&#x5E72;&#x4E0D;&#x5B8C;&#x7684;<strong>&#x9700;&#x6C42;</strong>&#xFF08;Runnable/Callable)&#x653E;&#x5728;<strong>&#x9700;&#x6C42;&#x6C60;&#xFF08;workQueue&#xFF09;</strong>&#x91CC;&#x6392;&#x961F;&#x3002;&#x6BCF;&#x4E2A;&#x7814;&#x53D1;&#x90E8;&#x90FD;&#x914D;&#x7F6E;&#x6709;<strong>&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#xFF08;corePoolSize&#xFF09;</strong>&#x548C;<strong>&#x6700;&#x5927;&#x80FD;&#x5BB9;&#x7EB3;&#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#xFF08;maximumPoolSize&#xFF09;</strong>&#x3002;&#x5177;&#x4F53;&#x8981;&#x505A;&#x7684;&#x4EFB;&#x52A1;&#x5C31;&#x662F;<strong>&#x4EA7;&#x54C1;&#x7684;&#x9700;&#x6C42;</strong>&#x3002;</p>
+<p>new &#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x76F8;&#x5F53;&#x4E8E;<strong>&#x521B;&#x5EFA;</strong>&#x4E86;&#x4E00;&#x4E2A;&#x7814;&#x53D1;&#x90E8;&#xFF0C;&#x521B;&#x5EFA;&#x7814;&#x53D1;&#x90E8;&#x65F6;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#xFF0C;&#x6700;&#x5927;&#x80FD;&#x5BB9;&#x7EB3;&#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#xFF0C;&#x9700;&#x6C42;&#x6C60;&#x7528;&#x54EA;&#x79CD;&#xFF08;BlockingQueue&#xFF09;,&#x5982;&#x679C;&#x5FD9;&#x4E0D;&#x8FC7;&#x6765;&#x7684;&#x9700;&#x6C42;&#x600E;&#x4E48;&#x7ED9;&#x4EA7;&#x54C1;&#x56DE;&#x590D;&#xFF08;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#xFF09;&#x7B49;&#x7B49;&#x5185;&#x5BB9;&#x3002;&#x521A;&#x5F00;&#x59CB;&#x8FD9;&#x4E2A;&#x7814;&#x53D1;&#x90E8;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x5458;&#x4E5F;&#x6CA1;&#x6709;&#x3002;</p>
+<p>&#x5F53;&#x4EA7;&#x54C1;&#x7ED9;&#x8FD9;&#x4E2A;&#x7814;&#x53D1;&#x90E8;&#x63D0;&#x4E00;&#x4E2A;&#x9700;&#x6C42;&#x65F6;&#xFF08;&#x5F53;&#x7136;&#x80AF;&#x5B9A;&#x4E0D;&#x4F1A;&#x53EA;&#x63D0;&#x4E00;&#x4E2A;&#xFF0C;&#x4ED6;&#x4EEC;&#x4F1A;&#x4E0D;&#x65AD;&#x7684;&#x63D0;&#x9700;&#x6C42;&#x3002;&#x8FD9;&#x91CC;&#x4EE5;&#x63D0;&#x4E00;&#x4E2A;&#x9700;&#x6C42;&#x4E3A;&#x4F8B;&#xFF09;</p>
+<p>&#x9996;&#x5148;&#x4F1A;&#x770B;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x62DB;&#x8058;&#x6EE1;&#x4E86;&#x6CA1;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6EE1;&#xFF0C;&#x4F1A;&#x62DB;&#x8058;&#x4E00;&#x4E2A;<strong>&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;</strong>&#xFF0C;&#x62DB;&#x8058;&#x8FDB;&#x6765;&#x5C31;&#x8BA9;&#x4ED6;&#x4E0D;&#x505C;&#x7684;&#x5DE5;&#x4F5C;&#xFF08;&#x5F88;&#x6B8B;&#x9177;&#x554A;&#xFF09;&#xFF0C;&#x5E72;&#x5B8C;&#x521A;&#x6D3E;&#x8FC7;&#x6765;&#x7684;&#x4EFB;&#x52A1;&#x4ED6;&#x4F1A;<strong>&#x4E3B;&#x52A8;&#x5728;&#x9700;&#x6C42;&#x6C60;&#x627E;</strong>&#x4E0B;&#x4E00;&#x4E2A;&#x9700;&#x6C42;&#x6765;&#x505A;&#xFF08;&#x597D;&#x5458;&#x5DE5;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x6C42;&#x6C60;<strong>&#x6CA1;&#x6709;&#x9700;&#x6C42;</strong>&#x4E86;&#xFF0C;&#x4ED6;&#x5C31;&#x505C;&#x6B62;&#x5DE5;&#x4F5C;&#x4E86;&#xFF0C;&#x7136;&#x540E;&#x7814;&#x53D1;&#x90E8;&#x4F1A;&#x628A;&#x4ED6;<strong>&#x88C1;&#x6389;</strong>&#xFF0C;&#x5982;&#x679C;&#x88C1;&#x6389;&#x540E;&#x53D1;&#x73B0;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;<strong>&#x4E0D;&#x591F;</strong>&#x4E86;&#xFF0C;&#x5C31;&#x4F1A;<strong>&#x518D;&#x62DB;&#x8058;</strong>&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x5458;&#x3002;&#x88C1;&#x6389;&#x540E;&#xFF0C;&#x8981;&#x662F;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#x8FD8;&#x591F;&#x5C31;&#x4E0D;&#x62DB;&#x8058;&#x4E86;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#x6EE1;&#x4E86;&#xFF0C;&#x5C31;&#x770B;&#x9700;&#x6C42;&#x6C60;&#x6EE1;&#x6CA1;&#x6EE1;&#xFF0C;&#x5982;&#x679C;<strong>&#x9700;&#x6C42;&#x6C60;&#x6CA1;&#x6EE1;</strong>&#xFF0C;&#x5C31;&#x628A;&#x9700;&#x6C42;&#x6254;&#x8FDB;&#x9700;&#x6C42;&#x6C60;&#x91CC;&#xFF1B;&#x5982;&#x679C;<strong>&#x9700;&#x6C42;&#x6C60;&#x6EE1;&#x4E86;</strong>&#xFF0C;&#x5C31;&#x770B;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;<strong>&#x6709;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#x4E0A;&#x9650;</strong>&#xFF0C;&#x5982;&#x679C;&#x8FBE;&#x5230;&#x4E86;&#xFF0C;&#x5C31;&#x5BF9;&#x4EA7;&#x54C1;&#x8BF4;&#xFF0C;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x6211;&#x4EEC;<strong>&#x505A;&#x4E0D;&#x4E86;</strong>&#xFF0C;&#x6CA1;&#x8D44;&#x6E90;&#xFF1B;&#x5982;&#x679C;&#x6CA1;&#x8FBE;&#x5230;&#xFF0C;&#x5C31;&#x62DB;&#x8058;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x5458;&#xFF0C;&#x62DB;&#x8058;&#x8FDB;&#x6765;&#x5C31;&#x8BA9;&#x4ED6;&#x4E0D;&#x505C;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x5E72;&#x5B8C;&#x521A;&#x6D3E;&#x8FC7;&#x6765;&#x7684;&#x9700;&#x6C42;&#x4ED6;&#x4F1A;&#x4E3B;&#x52A8;&#x5230;&#x9700;&#x6C42;&#x6C60;&#x627E;&#x4E0B;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x6765;&#x505A;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x6C42;&#x6C60;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x4E86;&#xFF0C;&#x4ED6;&#x5C31;&#x505C;&#x6B62;&#x5DE5;&#x4F5C;&#x4E86;&#xFF0C;&#x7136;&#x540E;&#x7814;&#x53D1;&#x90E8;&#x4F1A;&#x628A;&#x4ED6;&#x88C1;&#x6389;&#xFF0C;&#x5982;&#x679C;&#x88C1;&#x6389;&#x540E;&#x53D1;&#x73B0;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#x4E0D;&#x591F;&#x4E86;&#xFF0C;&#x5C31;&#x4F1A;&#x518D;&#x62DB;&#x8058;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x5458;&#x3002;&#x88C1;&#x6389;&#x540E;&#xFF0C;&#x8981;&#x662F;&#x9AA8;&#x5E72;&#x7A0B;&#x5E8F;&#x5458;&#x6570;&#x91CF;&#x8FD8;&#x591F;&#x5C31;&#x4E0D;&#x62DB;&#x8058;&#x4E86;&#x3002;</p>
+<h3 id="&#x6E90;&#x7801;&#x89E3;&#x6790;">&#x6E90;&#x7801;&#x89E3;&#x6790;</h3>
+<p>&#x9996;&#x5148;&#x662F;worker&#xFF08;&#x7A0B;&#x5E8F;&#x5458;&#xFF09;</p>
+<p>Worker&#x88AB;&#x88C5;&#x5728;&#x4E00;&#x4E2A;HashSet&#xFF08;workers&#xFF09;&#x91CC;&#x8FB9;&#xFF0C; &#x4ED6;&#x662F;&#x7528;&#x6765;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x7684;&#xFF0C;&#x4ED6;&#x4EEC;&#x7684;&#x804C;&#x8D23;&#x5C31;&#x662F;&#x4E0D;&#x65AD;&#x7684;&#x4ECE;workQueue&#x91CC;&#x8FB9;&#x53D6;&#x4EFB;&#x52A1;&#xFF0C;&#x7136;&#x540E;&#x6267;&#x884C;&#x3002;&#x5F53;workQueue&#xFF08;&#x9700;&#x6C42;&#x6C60;&#xFF09;&#x91CC;&#x8FB9;&#x62FF;&#x4E0D;&#x5230;&#x4EFB;&#x52A1;&#xFF0C;&#x6216;&#x8005;&#x7EBF;&#x7A0B;&#x6C60;&#x8FBE;&#x5230;&#x7279;&#x5B9A;&#x72B6;&#x6001;&#xFF0C;worker&#x5C31;&#x4F1A;&#x4ECE;workers&#x91CC;&#x8FB9;&#x79FB;&#x8D70;&#xFF08;&#x88AB;&#x88C1;&#xFF09;&#x3002;</p>
+<p>&#x4E0B;&#x8FB9;&#x662F;Worker&#x6E90;&#x7801;&#xFF0C;&#x79FB;&#x9664;&#x4E86;&#x975E;&#x5173;&#x952E;&#x7684;&#x4E1C;&#x897F;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Worker</span>
+    <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractQueuedSynchronizer</span>
+    <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span>
+</span>{
+
+    <span class="hljs-comment">// &#x6807;&#x8BC6;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x662F;&#x5728;&#x54EA;&#x4E2A;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;</span>
+    <span class="hljs-keyword">final</span> Thread thread;
+    Runnable firstTask;
+    <span class="hljs-comment">// &#x5B8C;&#x6210;&#x4E86;&#x51E0;&#x4E2A;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> completedTasks;
+
+    Worker(Runnable firstTask) {
+        <span class="hljs-comment">// &#x963B;&#x6B62;&#x4E2D;&#x65AD;&#xFF0C;&#x77E5;&#x9053;runWorker&#x6267;&#x884C;</span>
+        setState(-<span class="hljs-number">1</span>); <span class="hljs-comment">// inhibit interrupts until runWorker</span>
+        <span class="hljs-keyword">this</span>.firstTask = firstTask;
+        <span class="hljs-comment">// &#x76F4;&#x63A5;&#x7528;&#x4F60;&#x63D0;&#x4F9B;&#x7684;&#x7EBF;&#x7A0B;&#x5DE5;&#x5382;&#x641E;&#x4E2A;&#x7EBF;&#x7A0B;&#x51FA;&#x6765;</span>
+        <span class="hljs-keyword">this</span>.thread = getThreadFactory().newThread(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-comment">// &#x8C03;&#x7528;ThreadPoolExecutor&#x91CC;&#x8FB9;&#x7684;runWorker&#x65B9;&#x6CD5;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+        runWorker(<span class="hljs-keyword">this</span>);
+    }
+
+    <span class="hljs-comment">// &#x4EE5;&#x4E0B;&#x8FD9;&#x4E9B;&#x662F;AQS&#x76F8;&#x5173;&#x7684;&#x4E1C;&#x897F;</span>
+
+    <span class="hljs-comment">// 0&#x4EE3;&#x8868;&#x6CA1;&#x6709;&#x52A0;&#x9501;</span>
+    <span class="hljs-comment">// 1&#x4EE3;&#x8868;&#x52A0;&#x9501;&#x4E86;</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isHeldExclusively</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> getState() != <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryAcquire</span><span class="hljs-params">(<span class="hljs-keyword">int</span> unused)</span> </span>{
+        <span class="hljs-keyword">if</span> (compareAndSetState(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) {
+            setExclusiveOwnerThread(Thread.currentThread());
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryRelease</span><span class="hljs-params">(<span class="hljs-keyword">int</span> unused)</span> </span>{
+        setExclusiveOwnerThread(<span class="hljs-keyword">null</span>);
+        setState(<span class="hljs-number">0</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span>        </span>{ acquire(<span class="hljs-number">1</span>); }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">()</span>  </span>{ <span class="hljs-keyword">return</span> tryAcquire(<span class="hljs-number">1</span>); }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span>      </span>{ release(<span class="hljs-number">1</span>); }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isLocked</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> isHeldExclusively(); }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">interruptIfStarted</span><span class="hljs-params">()</span> </span>{
+        Thread t;
+        <span class="hljs-keyword">if</span> (getState() &gt;= <span class="hljs-number">0</span> &amp;&amp; (t = thread) != <span class="hljs-keyword">null</span> &amp;&amp; !t.isInterrupted()) {
+            <span class="hljs-keyword">try</span> {
+                t.interrupt();
+            } <span class="hljs-keyword">catch</span> (SecurityException ignore) {
+            }
+        }
+    }
+}
+</code></pre>
+<p>Worker&#x5B9E;&#x73B0;&#x4E86;Runnable&#x63A5;&#x53E3;&#xFF0C;&#x6240;&#x4EE5;&#x4ED6;&#x662F;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x6709;run&#x65B9;&#x6CD5;&#xFF1B;&#x540C;&#x65F6;&#x6709;&#x7EE7;&#x627F;&#x4E86;AQS&#xFF0C;&#x6240;&#x4EE5;&#x4ED6;&#x4E5F;&#x662F;&#x4E00;&#x628A;&#x9501;&#x3002;</p>
+<p>&#x4E0B;&#x8FB9;&#x662F;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x7684;&#x8FC7;&#x7A0B;</p>
+<p>&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x6709;submit&#x548C;execute, submit&#x5C31;&#x662F;&#x9996;&#x5148;&#x5C06;Callable&#x6216;&#x8005;Runnable&#x5305;&#x88C5;&#x6210;FutureTask&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;execute, &#x6240;&#x4EE5;&#x6838;&#x5FC3;&#x662F;&#x5206;&#x6790;execute</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable command)</span> </span>{
+    <span class="hljs-keyword">if</span> (command == <span class="hljs-keyword">null</span>)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+    <span class="hljs-comment">// &#x8FD9;&#x4E2A;c&#x91CC;&#x8FB9;&#x6709;&#x4E24;&#x4E2A;&#x4FE1;&#x606F;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x73B0;&#x5728;&#x6709;&#x591A;&#x5C11;worker, &#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x73B0;&#x5728;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x662F;&#x5565;</span>
+    <span class="hljs-comment">// workerCountOf&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x4ECE;&#x91CC;&#x8FB9;&#x63D0;&#x53D6; worker&#x7684;&#x6570;&#x91CF;&#x7684;</span>
+    <span class="hljs-keyword">int</span> c = ctl.get();
+    <span class="hljs-keyword">if</span> (workerCountOf(c) &lt; corePoolSize) { <span class="hljs-comment">// &#x5F53;&#x524D;worker&#x7684;&#x6570;&#x91CF;&#x6BD4;&#x9700;&#x8981;&#x7684;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;</span>
+        <span class="hljs-comment">// &#x52A0;worker&#x53BB;&#x6267;&#x884C;,&#x52A0;&#x6210;&#x529F;&#x5C31;&#x5B8C;&#x4E8B;&#x4E86;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x53EA;&#x8981;worker&#x6BD4;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x5C11;&#xFF0C;&#x5C31;&#x4F1A;&#x521B;&#x5EFA;worker</span>
+        <span class="hljs-comment">// &#x4E0D;&#x7BA1;&#x73B0;&#x5728;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x5728;&#x5DE5;&#x4F5C;&#xFF0C;&#x4E5F;&#x4E0D;&#x7BA1;workQueue&#x662F;&#x4E0D;&#x662F;&#x6EE1;&#x7684;</span>
+        <span class="hljs-comment">// addWorker&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x662F;&#x4E0D;&#x662F;&#x8981;&#x52A0;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#xFF08;&#x6216;&#x8005;&#x53EB;&#x6838;&#x5FC3;worker)</span>
+        <span class="hljs-keyword">if</span> (addWorker(command, <span class="hljs-keyword">true</span>))
+            <span class="hljs-keyword">return</span>;
+        c = ctl.get();
+    }
+    <span class="hljs-comment">// &#x5F53;&#x524D;worker&#x8FBE;&#x5230;&#x6216;&#x8D85;&#x8FC7;&#x4E86;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x6216;&#x8005;&#x52A0;worker&#x5931;&#x8D25;&#x4E86;&#xFF0C;&#x624D;&#x4F1A;&#x8D70;&#x4E0B;&#x8FB9;&#x7684;&#x6D41;&#x7A0B;</span>
+    <span class="hljs-comment">// worker&#x5DF2;&#x7ECF;&#x6BD4;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x591A;&#x4E86;</span>
+
+    <span class="hljs-comment">// &#x5982;&#x679C; &#x7EBF;&#x7A0B;&#x6C60;&#x6CA1;&#x6709;shutdown&#x7684;&#x8BDD; </span>
+    <span class="hljs-comment">// &#x5C31;&#x5C1D;&#x8BD5;&#x5C06;&#x4EFB;&#x52A1;&#x52A0;&#x5230;workQueue&#x91CC;&#x8FB9;&#xFF0C;&#x5DE5;&#x4F5C;&#x961F;&#x5217;&#x5165;&#x961F;&#x6210;&#x529F;&#x7684;&#x8BDD;&#x518D;&#x5F80;&#x91CC;&#x8FB9;&#x8D70;</span>
+    <span class="hljs-keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+        <span class="hljs-keyword">int</span> recheck = ctl.get();
+        <span class="hljs-keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))
+            <span class="hljs-comment">// &#x518D;&#x6B21;&#x68C0;&#x67E5;&#x72B6;&#x6001;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x8981;&#x505C;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x62D2;&#x7EDD;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x628A;worker&#x4ECE;&#x5DE5;&#x4F5C;&#x961F;&#x5217;&#x6254;&#x6389;</span>
+            reject(command);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (workerCountOf(recheck) == <span class="hljs-number">0</span>)
+            <span class="hljs-comment">// &#x5982;&#x679C;&#x6CA1;&#x6709;worker&#x7684;&#x8BDD;(&#x8BF4;&#x660E;&#x6CA1;&#x52A0;&#x8FDB;&#x53BB;&#xFF0C;&#x8FD9;&#x79CD;&#x573A;&#x666F;&#x6211;&#x6CA1;&#x60F3;&#x5230;&#x662F;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;)&#xFF0C;&#x52A0;&#x4E00;&#x4E2A;worker</span>
+            addWorker(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);
+        <span class="hljs-comment">// &#x5176;&#x4ED6;&#x60C5;&#x51B5;&#xFF0C;&#x4E22;&#x5230;&#x5DE5;&#x4F5C;&#x961F;&#x5217;&#x5C31;&#x4E0D;&#x7528;&#x7BA1;&#x4E86;&#xFF0C;&#x7B49;&#x7740;worker&#x53BB;&#x5904;&#x7406;</span>
+    }
+    <span class="hljs-comment">// &#x5982;&#x679C;&#x961F;&#x5217;&#x6EE1;&#x4E86;&#x52A0;&#x5931;&#x8D25;&#x4E86;&#xFF0C;&#x6216;&#x8005;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x4E0D;&#x6EE1;&#x8DB3;&#x4E86;&#xFF0C;&#x5C31;&#x5C1D;&#x8BD5;&#x52A0;&#x666E;&#x901A;worker(&#x975E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;)</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!addWorker(command, <span class="hljs-keyword">false</span>))
+        <span class="hljs-comment">// &#x52A0;&#x5931;&#x8D25;&#x4E86;&#x5C31;&#x62D2;&#x7EDD;&#x4EFB;&#x52A1;</span>
+        <span class="hljs-comment">// &#x5931;&#x8D25;&#x4E00;&#x65B9;&#x9762;&#x53EF;&#x80FD;&#x662F;worker&#x6570;&#x91CF;&#x5DF2;&#x7ECF;&#x8FBE;&#x5230;&#x4F60;&#x7684;&#x7ED9;&#x7684;maximumPoolSize</span>
+        <span class="hljs-comment">// &#x53E6;&#x4E00;&#x65B9;&#x9762;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x68C0;&#x67E5;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x4E0D;&#x5BF9;&#x4E86;</span>
+        reject(command);
+}
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x53D1;&#x73B0;execute&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x5B8C;&#x6210;&#x4E86;&#x4E0A;&#x8FB9;&#x8BF4;&#x7684;&#x201C;&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x201D;&#x8FD9;&#x4E2A;&#x56FE;&#x91CC;&#x63CF;&#x8FF0;&#x7684;&#x8FC7;&#x7A0B;&#x3002; &#x5927;&#x96C4;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x8FD8;&#x6709;&#x51E0;&#x4E2A;&#x7591;&#x95EE;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;Woker&#x662F;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5E76;&#x52A0;&#x5165;workers&#x7684;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;worker&#x662F;&#x5982;&#x4F55;&#x542F;&#x52A8;&#x7684;&#xFF0C;&#x518D;&#x5C31;&#x662F;worker&#x662F;&#x5982;&#x4F55;&#x8FD0;&#x884C;&#x7684;</p>
+<p>&#x751F;&#x6D3B;&#x8FD8;&#x8981;&#x7EE7;&#x7EED;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">addWorker</span><span class="hljs-params">(Runnable firstTask, <span class="hljs-keyword">boolean</span> core)</span> </span>{
+    retry:
+    <span class="hljs-keyword">for</span> (;;) {
+        <span class="hljs-keyword">int</span> c = ctl.get();
+        <span class="hljs-keyword">int</span> rs = runStateOf(c);
+
+        <span class="hljs-comment">// &#x505A;&#x4E00;&#x4E9B;&#x6821;&#x9A8C;&#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x72B6;&#x6001;&#x8981;&#x6EE1;&#x8DB3;&#x4E00;&#x5B9A;&#x6761;&#x4EF6;</span>
+        <span class="hljs-comment">// &#x800C;&#x4E14;&#x5F97;&#x63D0;&#x4EA4;&#x4EFB;&#x52A1;&#x8FC7;&#x6765;&#xFF0C;&#x518D;&#x5C31;&#x662F;workQueue&#x4E0D;&#x80FD;&#x662F;&#x7A7A;&#x7684;</span>
+        <span class="hljs-keyword">if</span> (rs &gt;= SHUTDOWN &amp;&amp;
+            ! (rs == SHUTDOWN &amp;&amp;
+                firstTask == <span class="hljs-keyword">null</span> &amp;&amp;
+                ! workQueue.isEmpty()))
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+        <span class="hljs-keyword">for</span> (;;) {
+            <span class="hljs-keyword">int</span> wc = workerCountOf(c);
+            <span class="hljs-comment">// &#x770B;&#x4F60;&#x662F;&#x8981;&#x521B;&#x5EFA;&#x6838;&#x5FC3;worker&#x8FD8;&#x662F;&#x666E;&#x901A;worker</span>
+            <span class="hljs-comment">// &#x6838;&#x5FC3;&#x770B;&#x8D85;&#x6CA1;&#x8D85;&#x8FC7;corePoolSize, &#x666E;&#x901A;&#x770B;&#x8D85;&#x6CA1;&#x8D85;&#x8FC7;maximumPoolSize</span>
+            <span class="hljs-keyword">if</span> (wc &gt;= CAPACITY ||
+                wc &gt;= (core ? corePoolSize : maximumPoolSize))
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            <span class="hljs-keyword">if</span> (compareAndIncrementWorkerCount(c))
+            <span class="hljs-comment">// &#x589E;&#x52A0;worker&#x6570;&#x91CF;&#x5931;&#x8D25;&#x5C31;&#x5728;&#x6765;</span>
+                <span class="hljs-keyword">break</span> retry;
+            c = ctl.get();  <span class="hljs-comment">// Re-read ctl</span>
+            <span class="hljs-keyword">if</span> (runStateOf(c) != rs)
+                <span class="hljs-comment">// &#x4E2D;&#x9014;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x4E86;</span>
+                <span class="hljs-keyword">continue</span> retry;
+        }
+    }
+
+    <span class="hljs-keyword">boolean</span> workerStarted = <span class="hljs-keyword">false</span>;
+    <span class="hljs-keyword">boolean</span> workerAdded = <span class="hljs-keyword">false</span>;
+    Worker w = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">// worker&#x5C31;&#x662F;&#x8FD9;&#x4E48;&#x521B;&#x5EFA;&#x7684;</span>
+        w = <span class="hljs-keyword">new</span> Worker(firstTask);
+        <span class="hljs-keyword">final</span> Thread t = w.thread;
+        <span class="hljs-keyword">if</span> (t != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">final</span> ReentrantLock mainLock = <span class="hljs-keyword">this</span>.mainLock;
+            <span class="hljs-comment">// &#x52A0;worker&#x662F;&#x8981;&#x52A0;&#x5168;&#x5C40;&#x9501;&#x7684;</span>
+            mainLock.lock();
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-keyword">int</span> rs = runStateOf(ctl.get());
+
+                <span class="hljs-keyword">if</span> (rs &lt; SHUTDOWN ||
+                    (rs == SHUTDOWN &amp;&amp; firstTask == <span class="hljs-keyword">null</span>)) {
+                    <span class="hljs-keyword">if</span> (t.isAlive()) <span class="hljs-comment">// precheck that t is startable</span>
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalThreadStateException();
+                    workers.add(w);
+                    <span class="hljs-keyword">int</span> s = workers.size();
+                    <span class="hljs-keyword">if</span> (s &gt; largestPoolSize)
+                        largestPoolSize = s;
+                    workerAdded = <span class="hljs-keyword">true</span>;
+                }
+            } <span class="hljs-keyword">finally</span> {
+                mainLock.unlock();
+            }
+            <span class="hljs-keyword">if</span> (workerAdded) {
+                <span class="hljs-comment">// worker&#x662F;&#x5728;&#x8FD9;&#x91CC;&#x542F;&#x52A8;&#x7684;</span>
+                t.start();
+                workerStarted = <span class="hljs-keyword">true</span>;
+            }
+        }
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-keyword">if</span> (! workerStarted)
+            addWorkerFailed(w);
+    }
+    <span class="hljs-keyword">return</span> workerStarted;
+}
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x89E3;&#x51B3;&#x4E86; Woker&#x662F;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5E76;&#x52A0;&#x5165;workers&#x7684;&#x4EE5;&#x53CA;worker&#x662F;&#x5982;&#x4F55;&#x542F;&#x52A8;&#x7684;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>addWorker&#x505A;&#x7684;&#x6838;&#x5FC3;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#xFF0C;&#x521B;&#x5EFA;worker, &#x542F;&#x52A8;worker, &#x5728;&#x521B;&#x5EFA;&#x4E4B;&#x524D;&#x8FD8;&#x4F1A;&#x505A;&#x4E00;&#x4E9B;&#x6821;&#x9A8C;&#x3002;&#x8C03;&#x7528;&#x4E86;worker&#x91CC;&#x8FB9;&#x7EBF;&#x7A0B;&#x7684;start&#x540E;&#x5C31;&#x8981;&#x7B49;&#x5F85;cpu&#x8C03;&#x5EA6;&#x6267;&#x884C;worker&#x7684;run&#x65B9;&#x6CD5;&#x4E86;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+    runWorker(<span class="hljs-keyword">this</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">runWorker</span><span class="hljs-params">(Worker w)</span> </span>{
+    Thread wt = Thread.currentThread();
+    Runnable task = w.firstTask;
+    w.firstTask = <span class="hljs-keyword">null</span>;
+    w.unlock(); <span class="hljs-comment">// allow interrupts</span>
+    <span class="hljs-keyword">boolean</span> completedAbruptly = <span class="hljs-keyword">true</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">// task&#x662F;&#x521B;&#x5EFA;worker&#x5E26;&#x8FDB;&#x53BB;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4F1A;&#x5148;&#x6267;&#x884C;&#x4ED6;&#xFF0C;&#x7136;&#x540E;&#x4ECE;workQueue&#x91CC;&#x8FB9;&#x53D6;</span>
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x6CA1;&#x6709;&#x7684;&#x8BDD;&#x8DF3;&#x51FA;&#x53BB;</span>
+        <span class="hljs-keyword">while</span> (task != <span class="hljs-keyword">null</span> || (task = getTask()) != <span class="hljs-keyword">null</span>) {
+            w.lock();   <span class="hljs-comment">// &#x9996;&#x5148;&#x52A0;&#x9501;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x52A0;&#x9501;&#xFF0C;&#x53EF;&#x80FD;&#x51E0;&#x4E2A;&#x7EBF;&#x7A0B;&#x63D0;&#x4EA4;&#x7684;&#x4EFB;&#x52A1;&#x540C;&#x65F6;&#x8FDB;&#x6765;&#x4E86;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x4E00;&#x4E9B;&#x5171;&#x4EAB;&#x72B6;&#x6001;&#x51FA;&#x95EE;&#x9898;</span>
+
+            <span class="hljs-comment">// &#x505A;&#x4E00;&#x4E9B;&#x72B6;&#x6001;&#x7684;&#x6821;&#x9A8C;</span>
+            <span class="hljs-keyword">if</span> ((runStateAtLeast(ctl.get(), STOP) ||
+                    (Thread.interrupted() &amp;&amp;
+                    runStateAtLeast(ctl.get(), STOP))) &amp;&amp;
+                !wt.isInterrupted())
+                wt.interrupt();
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-comment">// &#x6267;&#x884C;&#x4EFB;&#x52A1;&#x524D;&#x8C03;&#x7528;&#x4E00;&#x4E0B;beforeExecute&#xFF0C; &#x9ED8;&#x8BA4;&#x662F;&#x7A7A;&#x7684;</span>
+                beforeExecute(wt, task);
+                Throwable thrown = <span class="hljs-keyword">null</span>;
+                <span class="hljs-keyword">try</span> {
+                    <span class="hljs-comment">// &#x8FD9;&#x4E2A;&#x8DDF;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x7406;&#x89E3;&#x7684;Runnable&#x8FD8;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x53EF;&#x4EE5;&#x4F53;&#x4F1A;&#x4E0B;&#xFF0C;&#x4ED6;&#x8FD9;&#x4E2A;run&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x65B9;&#x6CD5;</span>
+                    <span class="hljs-comment">// &#x4ED6;&#x76F4;&#x63A5;&#x8C03;run&#x662F;&#x8981;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;&#x7EBF;&#x7A0B;&#x7684;start&#x53EA;&#x662F;&#x628A;worker&#x91CC;&#x8FB9;&#x7684;&#x90A3;&#x4E2A;run&#x8DD1;&#x8D77;&#x6765;&#x4E86;</span>
+                    task.run();
+                } <span class="hljs-keyword">catch</span> (RuntimeException x) {
+                    thrown = x; <span class="hljs-keyword">throw</span> x;
+                } <span class="hljs-keyword">catch</span> (Error x) {
+                    thrown = x; <span class="hljs-keyword">throw</span> x;
+                } <span class="hljs-keyword">catch</span> (Throwable x) {
+                    thrown = x; <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(x);
+                } <span class="hljs-keyword">finally</span> {
+                    <span class="hljs-comment">// &#x6267;&#x884C;&#x5B8C;&#x4E86;&#x8C03;&#x4E00;&#x4E0B;&#xFF0C;&#x91CC;&#x8FB9;&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x5F02;&#x5E38;</span>
+                    afterExecute(task, thrown);
+                }
+            } <span class="hljs-keyword">finally</span> {
+                task = <span class="hljs-keyword">null</span>;
+                w.completedTasks++;
+                w.unlock();
+            }
+        }
+        completedAbruptly = <span class="hljs-keyword">false</span>;
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-comment">// &#x4ECE;while&#x8DF3;&#x51FA;&#x6765;&#x8868;&#x660E;&#x6CA1;&#x6709;&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4E86;</span>
+        processWorkerExit(w, completedAbruptly);
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x4E5F;&#x6BD4;&#x8F83;&#x5BB9;&#x6613;&#xFF0C;&#x5C31;&#x662F;&#x4E0D;&#x65AD;&#x7684;&#x4ECE;workQueue&#x53D6;&#x4EFB;&#x52A1;&#xFF0C;&#x6267;&#x884C;&#xFF0C;&#x76F4;&#x5230;&#x6CA1;&#x4EFB;&#x52A1;&#x4E86;&#x8DF3;&#x51FA;&#x6765;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x662F;worker&#x5982;&#x4F55;&#x88AB;&#x9500;&#x6BC1;&#x7684;&#x95EE;&#x9898;&#x4E86;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">processWorkerExit</span><span class="hljs-params">(Worker w, <span class="hljs-keyword">boolean</span> completedAbruptly)</span> </span>{
+    <span class="hljs-keyword">if</span> (completedAbruptly) <span class="hljs-comment">// If abrupt, then workerCount wasn&apos;t adjusted</span>
+        decrementWorkerCount();
+
+    <span class="hljs-keyword">final</span> ReentrantLock mainLock = <span class="hljs-keyword">this</span>.mainLock;
+    mainLock.lock();
+    <span class="hljs-keyword">try</span> {
+        completedTaskCount += w.completedTasks;
+        <span class="hljs-comment">// &#x79FB;&#x9664;&#x6389;worker&#xFF08;&#x88C1;&#x5458;&#xFF09;</span>
+        workers.remove(w);
+    } <span class="hljs-keyword">finally</span> {
+        mainLock.unlock();
+    }
+
+    tryTerminate();
+
+    <span class="hljs-keyword">int</span> c = ctl.get();
+    <span class="hljs-keyword">if</span> (runStateLessThan(c, STOP)) {
+        <span class="hljs-keyword">if</span> (!completedAbruptly) {
+            <span class="hljs-keyword">int</span> min = allowCoreThreadTimeOut ? <span class="hljs-number">0</span> : corePoolSize;
+            <span class="hljs-keyword">if</span> (min == <span class="hljs-number">0</span> &amp;&amp; ! workQueue.isEmpty())
+                min = <span class="hljs-number">1</span>;
+            <span class="hljs-comment">// &#x6BD4;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x591A;&#x7684;&#x8BDD;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x7684;Worker&#x76F4;&#x63A5;&#x79FB;&#x9664;&#x5C31;&#x597D;</span>
+            <span class="hljs-keyword">if</span> (workerCountOf(c) &gt;= min)
+                <span class="hljs-keyword">return</span>; <span class="hljs-comment">// replacement not needed</span>
+        }
+        <span class="hljs-comment">// &#x5C0F;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x5C31;&#x4F1A;&#x518D;&#x52A0;&#x4E2A;Worker, &#x8BA9;&#x4ED6;&#x7EE7;&#x7EED;&#x7B49;&#x5F85;&#x63A5;&#x6536;&#x4EFB;&#x52A1;&#xFF08;&#x62DB;&#x4EBA;&#xFF09;</span>
+        addWorker(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);
+    }
+}
+</code></pre>
+<p>&#x76F4;&#x63A5;&#x4ECE;workers&#x91CC;&#x8FB9;&#x79FB;&#x9664;worker, &#x79FB;&#x9664;&#x540E;&#x5982;&#x679C;worker&#x6570;&#x91CF;&#x6BD4;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#x8FD8;&#x5C11;&#xFF0C;&#x5C31;&#x518D;&#x52A0;&#x4E2A;worker, &#x5426;&#x5219;&#x4E0D;&#x52A0;&#x3002;</p>
+<h2 id="&#x4E00;&#x4E9B;&#x4F53;&#x4F1A;">&#x4E00;&#x4E9B;&#x4F53;&#x4F1A;</h2>
+<p>&#x770B;&#x6E90;&#x7801;&#x4E00;&#x5B9A;&#x4E0D;&#x8981;&#x8FC7;&#x5206;&#x7EA0;&#x7ED3;&#x7EC6;&#x8282;&#xFF0C;&#x5C31;&#x50CF;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x6211;&#x770B;&#x7F51;&#x4E0A;&#x5F88;&#x591A;&#x6587;&#x7AE0;&#x53BB;&#x7B97;&#x90A3;&#x51E0;&#x4E2A;&#x4F4D;&#x8FD0;&#x7B97;&#x7684;&#x5341;&#x8FDB;&#x5236;&#x6570;&#xFF0C;&#x611F;&#x89C9;&#x662F;&#x5728;&#x6D6A;&#x8D39;&#x65F6;&#x95F4;&#xFF0C;&#x6CA1;&#x6709;&#x6293;&#x4F4F;&#x91CD;&#x70B9;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#x8FD9;&#x4E5F;&#x4E0D;&#x662F;&#x7EDD;&#x5BF9;&#x7684;&#xFF08;&#x4F3C;&#x4E4E;&#x8BF4;&#x7684;&#x77DB;&#x76FE;&#x4E86;&#xFF09;&#xFF0C;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#x7684;&#x8BBE;&#x8BA1;&#x8FD8;&#x662F;&#x975E;&#x5E38;&#x7CBE;&#x5999;&#x503C;&#x5F97;&#x5B66;&#x4E60;&#x7684;&#x3002;&#x8FD8;&#x662F;&#x8FD9;&#x4E2A;&#x4F4D;&#x8FD0;&#x7B97;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x53EA;&#x7528;&#x4E00;&#x4E2A;int&#x8868;&#x793A;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x548C;worker&#x7684;&#x6570;&#x91CF;&#x5462;&#x3002;</p>
+<p>&#x8981;&#x591A;&#x591A;&#x8054;&#x60F3;&#xFF0C;&#x8FD8;&#x662F;&#x8FD9;&#x4E2A;&#x4F4D;&#x8FD0;&#x7B97;&#xFF0C;&#x4ED6;&#x662F;&#x4E0D;&#x662F;&#x548C;&#x8BFB;&#x5199;&#x9501;&#x7528;&#x4E00;&#x4E2A;int&#x65E2;&#x8868;&#x793A;&#x5199;&#x72B6;&#x6001;&#x53C8;&#x8868;&#x793A;&#x8BFB;&#x72B6;&#x6001;&#x5341;&#x5206;&#x76F8;&#x4F3C;&#x3002;Worker&#x7EE7;&#x627F;AQS&#xFF0C;&#x662F;&#x5426;&#x80FD;&#x8BA9;&#x4F60;&#x60F3;&#x8D77;AQS&#x7684;&#x79CD;&#x79CD;&#x3002;</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;&#x4E2A;&#x4EBA;&#x89C9;&#x5F97;&#x7B2C;&#x4E00;&#x904D;&#x770B;&#x662F;&#x4E00;&#x5B9A;&#x4E0D;&#x80FD;&#x6C89;&#x6EBA;&#x4E8E;&#x7EC6;&#x8282;&#x7684;&#xFF0C;&#x4ED6;&#x4F1A;&#x8BA9;&#x4F60;&#x8FF7;&#x60D8;&#x548C;&#x4E27;&#x5931;&#x4FE1;&#x5FC3;&#xFF1B;&#x7B2C;&#x4E8C;&#x904D;&#x3001;&#x7B2C;&#x4E09;&#x904D;&#x53EF;&#x4EE5;&#x5173;&#x6CE8;&#x4E00;&#x4E0B;&#x7EC6;&#x8282;&#xFF0C;&#x611F;&#x53D7;&#x5927;&#x5E08;&#x7EA7;&#x7684;&#x8BBE;&#x8BA1;&#x7684;&#x7F8E;&#x5999;&#x4E4B;&#x5904;&#x3002;&#x5F53;&#x7136;&#x7B14;&#x8005;&#x4EC5;&#x4EC5;&#x7C97;&#x7565;&#x770B;&#x4E86;&#x4E00;&#x904D;&#xFF08;&#x9003;~&#xFF09;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="01-使用线程池.html" class="navigation navigation-prev " aria-label="Previous page: 01-使用线程池">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="03-Executor.html" class="navigation navigation-next " aria-label="Next page: 03-Executor">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"02-线程池原理","level":"1.7.2","depth":2,"next":{"title":"03-Executor","level":"1.7.3","depth":2,"path":"第06章-线程池与Executor框架/03-Executor.md","ref":"第06章-线程池与Executor框架/03-Executor.md","articles":[]},"previous":{"title":"01-使用线程池","level":"1.7.1","depth":2,"path":"第06章-线程池与Executor框架/01-使用线程池.md","ref":"第06章-线程池与Executor框架/01-使用线程池.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第06章-线程池与Executor框架/02-线程池原理.md","mtime":"2020-05-16T02:18:07.585Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T02:33:32.746Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

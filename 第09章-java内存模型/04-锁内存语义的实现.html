@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>第02章-并发编程基础 · GitBook</title>
+        <title>04-锁内存语义的实现 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="01-线程的定义和意义.html" />
+    <link rel="next" href="05-concurrent包的实现.html" />
     
     
-    <link rel="prev" href="../第01章-在idea怎么调试jdk源码/" />
+    <link rel="prev" href="03-volatile内存语义.html" />
     
 
     </head>
@@ -115,9 +115,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="./">
+        <li class="chapter " data-level="1.3" data-path="../第02章-并发编程基础/">
             
-                <a href="./">
+                <a href="../第02章-并发编程基础/">
             
                     
                     第02章-并发编程基础
@@ -129,9 +129,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="01-线程的定义和意义.html">
+        <li class="chapter " data-level="1.3.1" data-path="../第02章-并发编程基础/01-线程的定义和意义.html">
             
-                <a href="01-线程的定义和意义.html">
+                <a href="../第02章-并发编程基础/01-线程的定义和意义.html">
             
                     
                     01-线程的定义和意义
@@ -142,9 +142,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="02-创建线程的三种方式.html">
+        <li class="chapter " data-level="1.3.2" data-path="../第02章-并发编程基础/02-创建线程的三种方式.html">
             
-                <a href="02-创建线程的三种方式.html">
+                <a href="../第02章-并发编程基础/02-创建线程的三种方式.html">
             
                     
                     02-创建线程的三种方式
@@ -155,9 +155,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.3" data-path="03-线程的一些属性.html">
+        <li class="chapter " data-level="1.3.3" data-path="../第02章-并发编程基础/03-线程的一些属性.html">
             
-                <a href="03-线程的一些属性.html">
+                <a href="../第02章-并发编程基础/03-线程的一些属性.html">
             
                     
                     03-线程的一些属性
@@ -168,9 +168,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="04-线程同步.html">
+        <li class="chapter " data-level="1.3.4" data-path="../第02章-并发编程基础/04-线程同步.html">
             
-                <a href="04-线程同步.html">
+                <a href="../第02章-并发编程基础/04-线程同步.html">
             
                     
                     04-线程同步
@@ -181,9 +181,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5" data-path="05-线程间的通信.html">
+        <li class="chapter " data-level="1.3.5" data-path="../第02章-并发编程基础/05-线程间的通信.html">
             
-                <a href="05-线程间的通信.html">
+                <a href="../第02章-并发编程基础/05-线程间的通信.html">
             
                     
                     05-线程间的通信
@@ -194,9 +194,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.6" data-path="06-控制线程.html">
+        <li class="chapter " data-level="1.3.6" data-path="../第02章-并发编程基础/06-控制线程.html">
             
-                <a href="06-控制线程.html">
+                <a href="../第02章-并发编程基础/06-控制线程.html">
             
                     
                     06-控制线程
@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.7" data-path="07-线程的生命周期.html">
+        <li class="chapter " data-level="1.3.7" data-path="../第02章-并发编程基础/07-线程的生命周期.html">
             
-                <a href="07-线程的生命周期.html">
+                <a href="../第02章-并发编程基础/07-线程的生命周期.html">
             
                     
                     07-线程的生命周期
@@ -220,9 +220,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.8" data-path="08-ThreadLocal.html">
+        <li class="chapter " data-level="1.3.8" data-path="../第02章-并发编程基础/08-ThreadLocal.html">
             
-                <a href="08-ThreadLocal.html">
+                <a href="../第02章-并发编程基础/08-ThreadLocal.html">
             
                     
                     08-ThreadLocal
@@ -233,9 +233,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.9" data-path="09-原子类.html">
+        <li class="chapter " data-level="1.3.9" data-path="../第02章-并发编程基础/09-原子类.html">
             
-                <a href="09-原子类.html">
+                <a href="../第02章-并发编程基础/09-原子类.html">
             
                     
                     09-原子类
@@ -677,9 +677,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="../第09章-java内存模型/">
+        <li class="chapter " data-level="1.10" data-path="./">
             
-                <a href="../第09章-java内存模型/">
+                <a href="./">
             
                     
                     第09章-java内存模型
@@ -691,9 +691,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../第09章-java内存模型/01-java内存模型基础.html">
+        <li class="chapter " data-level="1.10.1" data-path="01-java内存模型基础.html">
             
-                <a href="../第09章-java内存模型/01-java内存模型基础.html">
+                <a href="01-java内存模型基础.html">
             
                     
                     01-java内存模型基础
@@ -704,9 +704,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.2" data-path="../第09章-java内存模型/02-重排序.html">
+        <li class="chapter " data-level="1.10.2" data-path="02-重排序.html">
             
-                <a href="../第09章-java内存模型/02-重排序.html">
+                <a href="02-重排序.html">
             
                     
                     02-重排序
@@ -717,9 +717,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.3" data-path="../第09章-java内存模型/03-volatile内存语义.html">
+        <li class="chapter " data-level="1.10.3" data-path="03-volatile内存语义.html">
             
-                <a href="../第09章-java内存模型/03-volatile内存语义.html">
+                <a href="03-volatile内存语义.html">
             
                     
                     03-volatile内存语义
@@ -730,9 +730,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.4" data-path="../第09章-java内存模型/04-锁内存语义的实现.html">
+        <li class="chapter active" data-level="1.10.4" data-path="04-锁内存语义的实现.html">
             
-                <a href="../第09章-java内存模型/04-锁内存语义的实现.html">
+                <a href="04-锁内存语义的实现.html">
             
                     
                     04-锁内存语义的实现
@@ -743,9 +743,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.5" data-path="../第09章-java内存模型/05-concurrent包的实现.html">
+        <li class="chapter " data-level="1.10.5" data-path="05-concurrent包的实现.html">
             
-                <a href="../第09章-java内存模型/05-concurrent包的实现.html">
+                <a href="05-concurrent包的实现.html">
             
                     
                     05-concurrent包的实现
@@ -756,9 +756,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.6" data-path="../第09章-java内存模型/06-final域的内存语义.html">
+        <li class="chapter " data-level="1.10.6" data-path="06-final域的内存语义.html">
             
-                <a href="../第09章-java内存模型/06-final域的内存语义.html">
+                <a href="06-final域的内存语义.html">
             
                     
                     06-final域的内存语义
@@ -769,9 +769,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.7" data-path="../第09章-java内存模型/07-happens-before.html">
+        <li class="chapter " data-level="1.10.7" data-path="07-happens-before.html">
             
-                <a href="../第09章-java内存模型/07-happens-before.html">
+                <a href="07-happens-before.html">
             
                     
                     07-happens-before
@@ -817,7 +817,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >第02章-并发编程基础</a>
+        <a href=".." >04-锁内存语义的实现</a>
     </h1>
 </div>
 
@@ -832,9 +832,17 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x7B2C;02&#x7AE0;-&#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x57FA;&#x7840;">&#x7B2C;02&#x7AE0;-&#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x57FA;&#x7840;</h1>
-<p>&#x9996;&#x5148;&#x80FD;&#x591F;&#x628A;&#x591A;&#x7EBF;&#x7A0B;&#x7A0B;&#x5E8F;&#x8DD1;&#x8D77;&#x6765;&#xFF0C;&#x611F;&#x89C9;&#x4F1A;&#x6709;&#x4E00;&#x4E9B;&#x6210;&#x5C31;&#x611F;&#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x4E9B;&#x4FE1;&#x5FC3;&#x5427;&#x3002;</p>
-<p>&#x672C;&#x7AE0;&#x5C31;&#x662F;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x6BD4;&#x5982;&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x7528;&#x591A;&#x7EBF;&#x7A0B;&#xFF0C;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#xFF0C;&#x5982;&#x4F55;&#x542F;&#x52A8;&#xFF0C;&#x5982;&#x4F55;&#x540C;&#x6B65;&#xFF0C;&#x5982;&#x4F55;&#x901A;&#x4FE1;&#xFF0C;&#x7EBF;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x662F;&#x600E;&#x6837;&#x7684;&#x7B49;&#x7B49;&#xFF0C;&#x671F;&#x671B;&#x80FD;&#x591F;&#x5FEB;&#x901F;&#x7684;&#x628A;&#x591A;&#x7EBF;&#x7A0B;&#x8DD1;&#x8D77;&#x6765;&#x3002;</p>
+                                <h1 id="&#x9501;&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x7684;&#x5B9E;&#x73B0;">&#x9501;&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x7684;&#x5B9E;&#x73B0;</h1>
+<p>&#x9501;&#x4E00;&#x822C;&#x5F0F;&#x57FA;&#x4E8E;AQS&#x5B9E;&#x73B0;&#x7684;&#xFF0C;AQS&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A;volatile&#x7684;state&#xFF0C; &#x8FD9;&#x4E2A;state&#x5F0F;&#x5B9E;&#x73B0;&#x9501;&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x7684;&#x5173;&#x952E;</p>
+<h2 id="cas">CAS</h2>
+<p>&#x5982;&#x679C;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x503C;&#x7B49;&#x4E8E;&#x9884;&#x671F;&#x503C;&#xFF0C;&#x5219;&#x4EE5;&#x539F;&#x5B50;&#x65B9;&#x5F0F;&#x5C06;&#x540C;&#x6B65;&#x72B6;&#x6001;&#x8BBE;&#x7F6E;&#x4E3A;&#x7ED9;&#x5B9A;&#x7684;&#x66F4;&#x65B0;&#x503C;&#x3002;&#x6B64;&#x64CD;&#x4F5C;&#x5177;&#x6709;volatile&#x8BFB;&#x548C;&#x5199;&#x7684;&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x3002;</p>
+<p>&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x4F1A;&#x5BF9;volatile&#x8BFB;&#x4E0E;volatile&#x8BFB;&#x540E;&#x9762;&#x7684;&#x4EFB;&#x610F;&#x5185;&#x5B58;&#x64CD;&#x4F5C;&#x91CD;&#x6392;&#x5E8F;&#xFF1B;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x4F1A;&#x5BF9;volatile&#x5199;&#x4E0E;volatile&#x5199;&#x524D;&#x9762;&#x7684;&#x4EFB;&#x610F;&#x5185;&#x5B58;&#x64CD;&#x4F5C;&#x91CD;&#x6392;&#x5E8F;&#x3002;&#x7EC4;&#x5408;&#x8FD9;&#x4E24;&#x4E2A;&#x6761;&#x4EF6;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x4E3A;&#x4E86;&#x540C;&#x65F6;&#x5B9E;&#x73B0;volatile&#x8BFB;&#x548C;volatile&#x5199;&#x7684;&#x5185;&#x5B58;&#x8BED;&#x4E49;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x80FD;&#x5BF9;CAS&#x4E0E;CAS&#x524D;&#x9762;&#x548C;&#x540E;&#x9762;&#x7684;&#x4EFB;&#x610F;&#x5185;&#x5B58;&#x64CD;&#x4F5C;&#x91CD;&#x6392;&#x5E8F;</p>
+<h2 id="&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x603B;&#x7ED3;">&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x603B;&#x7ED3;</h2>
+<ul>
+<li>&#x516C;&#x5E73;&#x9501;&#x548C;&#x975E;&#x516C;&#x5E73;&#x9501;&#x91CA;&#x653E;&#x65F6;&#xFF0C;&#x6700;&#x540E;&#x90FD;&#x8981;&#x5199;&#x4E00;&#x4E2A;volatile&#x53D8;&#x91CF;state&#x3002;</li>
+<li>&#x516C;&#x5E73;&#x9501;&#x83B7;&#x53D6;&#x65F6;&#xFF0C;&#x9996;&#x5148;&#x4F1A;&#x53BB;&#x8BFB;volatile&#x53D8;&#x91CF;&#x3002;</li>
+<li>&#x975E;&#x516C;&#x5E73;&#x9501;&#x83B7;&#x53D6;&#x65F6;&#xFF0C;&#x9996;&#x5148;&#x4F1A;&#x7528;CAS&#x66F4;&#x65B0;volatile&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x540C;&#x65F6;&#x5177;&#x6709;volatile&#x8BFB;&#x548C;volatile&#x5199;&#x7684;&#x5185;&#x5B58;&#x8BED;&#x4E49;&#x3002;</li>
+</ul>
 
                                 
                                 </section>
@@ -862,12 +870,12 @@
 
             
                 
-                <a href="../第01章-在idea怎么调试jdk源码/" class="navigation navigation-prev " aria-label="Previous page: 第01章-在idea怎么调试jdk源码">
+                <a href="03-volatile内存语义.html" class="navigation navigation-prev " aria-label="Previous page: 03-volatile内存语义">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="01-线程的定义和意义.html" class="navigation navigation-next " aria-label="Next page: 01-线程的定义和意义">
+                <a href="05-concurrent包的实现.html" class="navigation navigation-next " aria-label="Next page: 05-concurrent包的实现">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -878,7 +886,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"第02章-并发编程基础","level":"1.3","depth":1,"next":{"title":"01-线程的定义和意义","level":"1.3.1","depth":2,"path":"第02章-并发编程基础/01-线程的定义和意义.md","ref":"第02章-并发编程基础/01-线程的定义和意义.md","articles":[]},"previous":{"title":"第01章-在idea怎么调试jdk源码","level":"1.2","depth":1,"path":"第01章-在idea怎么调试jdk源码/README.md","ref":"第01章-在idea怎么调试jdk源码/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第02章-并发编程基础/README.md","mtime":"2020-05-04T10:14:35.688Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T02:33:32.746Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"04-锁内存语义的实现","level":"1.10.4","depth":2,"next":{"title":"05-concurrent包的实现","level":"1.10.5","depth":2,"path":"第09章-java内存模型/05-concurrent包的实现.md","ref":"第09章-java内存模型/05-concurrent包的实现.md","articles":[]},"previous":{"title":"03-volatile内存语义","level":"1.10.3","depth":2,"path":"第09章-java内存模型/03-volatile内存语义.md","ref":"第09章-java内存模型/03-volatile内存语义.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"第09章-java内存模型/04-锁内存语义的实现.md","mtime":"2020-05-16T02:18:07.599Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T02:33:32.746Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
