@@ -81,7 +81,7 @@ public class Demo_02_08_2_ThreadLocalInherit {
 
 ## 实现原理
 
-很容易想到，因为这个东西是跟着线程走的，所以应该是线程的一个属性，事实上也是这样，ThreadLocal和InheritableThreadLocal都是存储在Thread里面的。
+很容易想到，因为这个东西是`跟着线程走`的，所以应该是线程的一个属性，事实上也是这样，ThreadLocal和InheritableThreadLocal都是存储在Thread里面的。
 
 ```java
 /* ThreadLocal values pertaining to this thread. This map is maintained
