@@ -41,6 +41,8 @@
                 
     * [06-Condition](第03章-锁/06-Condition.md)
                 
+    * [07-章小结](第03章-锁/07-章小结.md)
+                
 * [第04章-并发容器](第04章-并发容器/README.md)
         
     * [01-ConcurrentHashMap](第04章-并发容器/01-ConcurrentHashMap.md)
