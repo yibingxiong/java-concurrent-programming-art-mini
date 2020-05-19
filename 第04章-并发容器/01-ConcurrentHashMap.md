@@ -38,6 +38,6 @@ public synchronized V get(Object key)
 
 ![ConcurrentHashMap结构](images/ConcurrentHashMap结构.png)
 
-感觉ConcurrentHashMap了解到这里已经够了，搞清楚他高效的原因就时用了分段锁
+感觉ConcurrentHashMap了解到这里已经够了，搞清楚他高效的原因就是用了分段锁
 
 然后就是put和get时都需要先拿到Segment,所以涉及如何定位Segment的问题，按书上说的是对key做再散列。
