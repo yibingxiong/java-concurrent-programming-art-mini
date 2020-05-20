@@ -21,6 +21,7 @@ Executor框架共有三大成员+一工具类
 - SingleThreadExecutor：创建只有单个线程的线程池
 - FixedThreadPool：用于创建固定线程数量的线程池
 - CachedThreadPool：创建一个会根据需要创建新线程的线程池
+- ScheduledThreadPoolExecutor: 
 
 #### ScheduledThreadPoolExecutor
 
@@ -177,7 +178,7 @@ public ScheduledFuture<?> scheduleWithFixedDelay(Runnable command,
 
 ### 原理
 
-这个定时任务的核心就是使用DelayQueue，但是他不是使用的concurrent包的那个DelayQueue, 而是自己封装了一个DelayedWorkQueue，这两者的区别笔者没有细看，一直从任务队列取到期的任务执行，同时把执行的任务再放回DelayQueue。
+这个定时任务的核心就是使用DelayQueue，但是他不是使用的concurrent包的那个DelayQueue, 而是自己封装了一个DelayedWorkQueue，这两者的区别笔者没有细看. 大概就是每个线程都一直从任务队列取到期的任务执行，同时把执行的任务再放回DelayQueue。
 
 
 #### RunnableScheduledFuture

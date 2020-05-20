@@ -75,6 +75,8 @@
                 
     * [03-Executor](第06章-线程池与Executor框架/03-Executor.md)
                 
+    * [04-章小结](第06章-线程池与Executor框架/04-章小结.md)
+                
 * [第07章-并发工具类](第07章-并发工具类/README.md)
         
     * [01-CountDownLatch](第07章-并发工具类/01-CountDownLatch.md)
