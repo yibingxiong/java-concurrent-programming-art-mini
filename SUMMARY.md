@@ -87,6 +87,8 @@
                 
     * [04-Exchanger](第07章-并发工具类/04-Exchanger.md)
                 
+    * [05-章小结](第07章-并发工具类/05-章小结.md)
+                
 * [第08章-Java并发机制的底层实现原理](第08章-Java并发机制的底层实现原理/README.md)
         
     * [01-volatile](第08章-Java并发机制的底层实现原理/01-volatile.md)
