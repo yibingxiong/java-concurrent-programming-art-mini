@@ -115,3 +115,5 @@
                 
     * [07-happens-before](第09章-java内存模型/07-happens-before.md)
                 
+    * [08-章小结](第09章-java内存模型/08-章小结.md)
+                
